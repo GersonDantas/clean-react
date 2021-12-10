@@ -28,5 +28,11 @@
     "lint-staged": "^12.1.2",
     "ts-jest": "^27.1.1",
     "typescript": "^4.5.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx lint-staged",
+      "pre-push": "npm run test:ci"
+    }
   }
 }
