@@ -1,15 +1,23 @@
 {
-  "extends": "standard-with-typescript",
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "extends": ["standard-with-typescript", "plugin:react/recommended"],
+  "plugins":["react"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "rules": {
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "off",
+    // "no-unused-vars": "off",
+    // "@typescript-eslint/no-unused-vars": "off",
     "camelcase": "off",
     "@typescript-eslint/camelcase": "off",
-    "space-before-function-paren": "off"
+    "space-before-function-paren": "off",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
   }
 }
