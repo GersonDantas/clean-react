@@ -25,24 +25,15 @@ module.exports = {
       {
         test: /\.ts(x?)$/,
         loader: 'ts-loader',
-        exclude: 'node_modules'
+        exclude: /node_modules/
       },
       {
         test: /\.scss$/, // (s?)css$ com css, s opcional
         use: [
-          // varios loaders
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true // ativar modulos
-            }
-          },
-          {
-            loader: 'sass-loader'
-          }
+          { loader: 'style-loader' },
+          { loader: 'css-modules-typescript-loader' },
+          { loader: 'css-loader', options: { modules: true } }, // ativar modulos
+          { loader: 'sass-loader' }
         ]
       }
     ]
