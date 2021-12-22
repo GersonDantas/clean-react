@@ -6,23 +6,24 @@ module.exports = {
   entry: './src/main/index.tsx',
   output: {
     path: path.join(__dirname, 'public/js'),
-    publicPath: 'public/js',
-    filename: 'js/bundle.js'
+    publicPath: '/public/js',
+    filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['.ts', 'tsx', '.js', 'scss'], // 'css' se for usar
+    extensions: ['.ts', '.tsx', '.js', 'scss', 'css'],
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.join(__dirname, 'src')
     }
   },
   devServer: {
     static: {
-      directory: path.join(__dirname, './public')
+      directory: './public'
     },
     devMiddleware: {
       writeToDisk: true
     },
-    historyApiFallback: true
+    historyApiFallback: true,
+    port: 8080
   },
   module: {
     rules: [
@@ -35,7 +36,6 @@ module.exports = {
         test: /\.scss$/, // (s?)css$ com css, s opcional
         use: [
           { loader: 'style-loader' },
-          { loader: 'css-modules-typescript-loader' },
           { loader: 'css-loader', options: { modules: true } }, // ativar modulos
           { loader: 'sass-loader' }
         ]
@@ -43,7 +43,7 @@ module.exports = {
     ]
   },
   externals: {
-    react: 'react',
+    react: 'React',
     'react-dom': 'ReactDOM'
   },
   plugins: [new CleanWebpackPlugin()]

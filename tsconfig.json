@@ -7,9 +7,12 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
     "jsx": "react",
-    "rootDir": "src",
+    "experimentalDecorators": true,
+    "outDir": "dist",
     "baseUrl": "src",
+    "rootDir": "src",
     "paths": {
       "@/*": ["*"]
     }

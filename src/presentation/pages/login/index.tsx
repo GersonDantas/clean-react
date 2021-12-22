@@ -4,9 +4,9 @@ import Styles from './login-styles.scss'
 const login: React.FC = () => {
   return (
     <div className={Styles.login}>
-      <header className={Styles.header}></header>
-      <form className={Styles.form}></form>
-      <footer className={Styles.footer}></footer>
+      <header className={Styles.header}>dfsfsdfsddddfsdfsd</header>
+      <form className={Styles.form}>dfdsfsd</form>
+      <footer className={Styles.footer}>sdfsdfsd</footer>
     </div>
   )
 }

@@ -1,32 +1,32 @@
-$white: #FFF;
+$white: #fff;
 $black: #000;
-$background: #F2F2F2;
+$background: #f2f2f2;
 $primary: #880e4f;
 $primaryDark: #880e4f;
-$primaryDark: #BC477B;
-
+$primaryDark: #bc477b;
 
 * {
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box; // deixa o tamanho no mesmo que eu setar, não aumentando a div
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; // deixa o tamanho no mesmo que eu setar, não aumentando a div
 }
 
-
 body {
-    background-color: $background;
+  background-color: $background;
 }
 
 .login {
-    .header {
-
-    }
-    .form {
-
-    }
-    .footer {
-
-    }
+  .header {
+    background-color: $primary;
+    height: 200px;
+  }
+  .form {
+    background-color: $background;
+  }
+  .footer {
+    background-color: $primary;
+    height: 200px;
+  }
 }
