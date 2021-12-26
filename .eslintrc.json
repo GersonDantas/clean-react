@@ -18,6 +18,7 @@
     "@typescript-eslint/camelcase": "off",
     "space-before-function-paren": "off",
     "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error"
+    "react/jsx-uses-vars": "error",
+    "react/prop-types": "off"
   }
 }
