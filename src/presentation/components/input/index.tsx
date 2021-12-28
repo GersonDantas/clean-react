@@ -1,20 +1,37 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Styles from './input-styles.scss'
+import Context from '@/presentation/context/form'
 
 type Props = React.DetailedHTMLProps<
-React.InputHTMLAttributes<HTMLInputElement>,
-HTMLInputElement
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
 >
 
 const Input: React.FC<Props> = (props: Props) => {
+  const { errorState } = useContext(Context)
+  const error = errorState[`${props.name}Error`]
   const enableInput = (event: React.FocusEvent<HTMLInputElement>): void => {
     event.target.readOnly = false
+  }
+
+  const getStatus = (): string => {
+    return '🔴'
+  }
+
+  const getError = (): string => {
+    return error
   }
 
   return (
     <div className={Styles.inputWrap}>
       <input {...props} onFocus={enableInput} readOnly />
-      <span className={Styles.status}>🔴</span>
+      <span
+        data-testid={`${props.name}-status`}
+        title={getError()}
+        className={Styles.status}
+      >
+        {getStatus()}
+      </span>
     </div>
   )
 }
