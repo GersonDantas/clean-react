@@ -2,10 +2,7 @@ import React, { useContext } from 'react'
 import Styles from './input-styles.scss'
 import Context from '@/presentation/context/form'
 
-type Props = React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->
+type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
 const Input: React.FC<Props> = (props: Props) => {
   const { state, setState } = useContext(Context)
@@ -38,11 +35,7 @@ const Input: React.FC<Props> = (props: Props) => {
         readOnly
         onChange={handleChange}
       />
-      <span
-        data-testid={`${props.name}-status`}
-        title={getError()}
-        className={Styles.status}
-      >
+      <span data-testid={`${props.name}-status`} title={getError()} className={Styles.status}>
         {getStatus()}
       </span>
     </div>
