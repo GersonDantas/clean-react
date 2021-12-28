@@ -5,7 +5,7 @@
     }
   },
   "extends": ["standard-with-typescript", "plugin:react/recommended"],
-  "plugins":["react"],
+  "plugins": ["react"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
@@ -19,6 +19,7 @@
     "space-before-function-paren": "off",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "@typescript-eslint/indent": "off"
   }
 }
