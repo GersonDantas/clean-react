@@ -1,12 +1,13 @@
 import React from 'react'
 import faker from 'faker'
 import { Login } from '..'
-import { render, RenderResult, fireEvent, cleanup } from '@testing-library/react'
+import { render, RenderResult, fireEvent, cleanup, waitFor } from '@testing-library/react'
 import { ValidationStub } from '@/presentation/test'
 import { Authentication, AuthenticationParams } from '@/domain/usecases'
 import { AccountModel } from '@/domain/models'
 import { mockAccountModel } from '@/domain/test'
 import { AuthenticationSpy } from '@/presentation/test/mock-authentication'
+import { InvalidCredentialsError } from '@/domain/errors'
 
 type SutTypes = {
   sut: RenderResult
@@ -38,7 +39,11 @@ const populatePasswordField = (sut: RenderResult, password = faker.internet.pass
   fireEvent.input(passwordInput, { target: { value: password } })
 }
 
-const simulateStatusForField = (sut: RenderResult, fieldName: string, validationError?: string): void => {
+const simulateStatusForField = (
+  sut: RenderResult,
+  fieldName: string,
+  validationError?: string
+): void => {
   const passwordStatus = sut.getByTestId(`${fieldName}-status`)
   expect(passwordStatus.title).toBe(validationError || 'Tudo certo!')
   expect(passwordStatus.textContent).toBe(validationError ? '🔴' : '🟢')
@@ -125,11 +130,15 @@ describe('Login component', () => {
     expect(authenticationSpy.callsCount).toBe(1)
   })
 
-  test('Should not authentication if form is invalid', () => {
-    const validationError = faker.random.words()
-    const { sut, authenticationSpy } = makeSut({ validationError })
-    populateEmailField(sut)
-    fireEvent.submit(sut.getByTestId('form'))
-    expect(authenticationSpy.callsCount).toBe(0)
+  test('Should present error if authentication fails', async () => {
+    const { sut, authenticationSpy } = makeSut()
+    const error = new InvalidCredentialsError()
+    jest.spyOn(authenticationSpy, 'auth').mockReturnValueOnce(Promise.reject(error))
+    simulateValidSubmit(sut)
+    const errorWrap = sut.getByTestId('error-wrap')
+    await waitFor(() => errorWrap)
+    const mainError = sut.getByTestId('main-error')
+    expect(mainError.textContent).toBe(error.message)
+    expect(errorWrap.childElementCount).toBe(1) // um filho, spinner não aparece, só error
   })
 })
