@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Styles from './login-styles.scss'
 import { Footer, FormStatus, Header, Input, Logo, Spinner } from '@/presentation/components'
 import Context from '@/presentation/context/form'
@@ -12,6 +12,7 @@ type Props = {
 }
 
 const login: React.FC<Props> = ({ validation, authentication }: Props) => {
+  const navigate = useNavigate()
   const [state, setState] = useState({
     isLoading: false,
     email: '',
@@ -46,6 +47,7 @@ const login: React.FC<Props> = ({ validation, authentication }: Props) => {
       })
 
       localStorage.setItem('accessToken', account.accessToken)
+      navigate('/', { replace: true })
     } catch (error) {
       setState({
         ...state,
@@ -73,7 +75,9 @@ const login: React.FC<Props> = ({ validation, authentication }: Props) => {
             Entrar
           </button>
 
-          <Link data-testid="signup" to="/signup" className={Styles.link}>Criar Conta</Link>
+          <Link data-testid="signup" to="/signup" className={Styles.link}>
+            Criar Conta
+          </Link>
 
           <FormStatus />
         </form>
