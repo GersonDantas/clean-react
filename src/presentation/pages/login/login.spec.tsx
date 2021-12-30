@@ -1,4 +1,6 @@
 import React from 'react'
+import { Router } from 'react-router-dom'
+import { createMemoryHistory } from 'history'
 import faker from 'faker'
 import 'jest-localstorage-mock'
 import { Login } from '..'
@@ -47,11 +49,16 @@ const simulateStatusForField = (
   expect(passwordStatus.textContent).toBe(validationError ? '🔴' : '🟢')
 }
 
+const history = createMemoryHistory()
 const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub()
   const authenticationSpy = new AuthenticationSpy()
   validationStub.errorMessage = params?.validationError // só deixo o campo limpo se não tiver error
-  const sut = render(<Login validation={validationStub} authentication={authenticationSpy} />)
+  const sut = render(
+    <Router navigator={history} location={history.location} navigationType={history.action}>
+      <Login validation={validationStub} authentication={authenticationSpy} />
+    </Router>
+  )
   return { sut, authenticationSpy }
 }
 
@@ -152,5 +159,13 @@ describe('Login component', () => {
       'accessToken',
       authenticationSpy.account.accessToken
     ) // que ele seja chamado com...
+  })
+
+  test('Should got to signUp page', () => {
+    const { sut } = makeSut()
+    const register = sut.getByTestId('signup')
+    fireEvent.click(register)
+    expect(history.index).toBe(1)
+    expect(history.location.pathname).toBe('/signup')
   })
 })
