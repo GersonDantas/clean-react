@@ -49,7 +49,8 @@ const simulateStatusForField = (
   expect(passwordStatus.textContent).toBe(validationError ? '🔴' : '🟢')
 }
 
-const history = createMemoryHistory()
+const history = createMemoryHistory({ initialEntries: ['/login'] })
+
 const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub()
   const authenticationSpy = new AuthenticationSpy()
@@ -159,13 +160,15 @@ describe('Login component', () => {
       'accessToken',
       authenticationSpy.account.accessToken
     ) // que ele seja chamado com...
+    expect(window.history.length).toBe(1)
+    expect(history.location.pathname).toBe('/')
   })
 
   test('Should got to signUp page', () => {
     const { sut } = makeSut()
     const register = sut.getByTestId('signup')
     fireEvent.click(register)
-    expect(history.index).toBe(1)
+    expect(window.history.length).toBe(1)
     expect(history.location.pathname).toBe('/signup')
   })
 })
