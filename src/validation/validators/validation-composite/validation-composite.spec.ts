@@ -8,10 +8,7 @@ type SutTypes = {
 }
 
 const makeSut = (fieldName: string): SutTypes => {
-  const fieldValidationSpy = [
-    new FieldValidationSpy(fieldName),
-    new FieldValidationSpy(fieldName)
-  ]
+  const fieldValidationSpy = [new FieldValidationSpy(fieldName), new FieldValidationSpy(fieldName)]
   const sut = new ValidationComposite(fieldValidationSpy)
   return {
     sut,
@@ -21,7 +18,7 @@ const makeSut = (fieldName: string): SutTypes => {
 
 describe('ValidationComposite', () => {
   test('should return error if any validation fails', () => {
-      const fieldName = faker.database.column()
+    const fieldName = faker.database.column()
     const { sut, fieldValidationSpy } = makeSut(fieldName)
     const errorMessage = faker.random.words()
     fieldValidationSpy[0].error = new Error(errorMessage)
