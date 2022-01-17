@@ -17,6 +17,19 @@ type SutTypes = {
 type SutParams = {
   validationError: string
 }
+const history = createMemoryHistory({ initialEntries: ['/login'] })
+
+const makeSut = (params?: SutParams): SutTypes => {
+  const validationStub = new ValidationStub()
+  const authenticationSpy = new AuthenticationSpy()
+  validationStub.errorMessage = params?.validationError // só deixo o campo limpo se não tiver error
+  const sut = render(
+    <Router history={history}>
+      <Login validation={validationStub} authentication={authenticationSpy} />
+    </Router>
+  )
+  return { sut, authenticationSpy }
+}
 
 const simulateValidSubmit = async (
   sut: RenderResult,
@@ -45,9 +58,10 @@ const testStatusForField = (
   fieldName: string,
   validationError?: string
 ): void => {
-  const passwordStatus = sut.getByTestId(`${fieldName}-status`)
-  expect(passwordStatus.title).toBe(validationError || 'Tudo certo!')
-  expect(passwordStatus.textContent).toBe(validationError ? '🔴' : '🟢')
+  const fieldStatus = sut.getByTestId(`${fieldName}-status`)
+  // console.log(fieldStatus.title, validationError)
+  expect(fieldStatus.title).toBe(validationError || 'Tudo certo!')
+  expect(fieldStatus.textContent).toBe(validationError ? '🔴' : '🟢')
 }
 
 const testErrorWrapChildCount = (sut: RenderResult, count: number): void => {
@@ -70,20 +84,6 @@ const testElementText = (sut: RenderResult, fieldName: string, text: string): vo
   expect(el.textContent).toBe(text)
 }
 
-const history = createMemoryHistory({ initialEntries: ['/login'] })
-
-const makeSut = (params?: SutParams): SutTypes => {
-  const validationStub = new ValidationStub()
-  const authenticationSpy = new AuthenticationSpy()
-  validationStub.errorMessage = params?.validationError // só deixo o campo limpo se não tiver error
-  const sut = render(
-    <Router navigator={history} location={history.location} navigationType={history.action}>
-      <Login validation={validationStub} authentication={authenticationSpy} />
-    </Router>
-  )
-  return { sut, authenticationSpy }
-}
-
 describe('Login component', () => {
   afterEach(cleanup)
 
@@ -91,7 +91,7 @@ describe('Login component', () => {
     localStorage.clear()
   })
 
-  test('Should start initial state', () => {
+  test('Should start initial with state', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
     testErrorWrapChildCount(sut, 0)
@@ -177,7 +177,7 @@ describe('Login component', () => {
       'accessToken',
       authenticationSpy.account.accessToken
     ) // que ele seja chamado com...
-    expect(window.history.length).toBe(1)
+    expect(history.length).toBe(1)
     expect(history.location.pathname).toBe('/')
   })
 
@@ -185,7 +185,7 @@ describe('Login component', () => {
     const { sut } = makeSut()
     const register = sut.getByTestId('signup')
     fireEvent.click(register)
-    expect(window.history.length).toBe(1)
+    expect(history.length).toBe(2)
     expect(history.location.pathname).toBe('/signup')
   })
 })

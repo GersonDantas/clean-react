@@ -7,6 +7,7 @@ type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>
 const Input: React.FC<Props> = (props: Props) => {
   const { state, setState } = useContext(Context)
   const error = state[`${props.name}Error`]
+
   const enableInput = (event: React.FocusEvent<HTMLInputElement>): void => {
     event.target.readOnly = false
   }
@@ -19,10 +20,12 @@ const Input: React.FC<Props> = (props: Props) => {
   }
 
   const getStatus = (): string => {
+    // console.log(error, props.name)
     return error ? '🔴' : '🟢'
   }
 
   const getError = (): string => {
+    // console.log(!error, error, props.name)
     return error || 'Tudo certo!'
   }
 

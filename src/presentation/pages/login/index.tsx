@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Styles from './login-styles.scss'
 import { Footer, FormStatus, Header, Input, Logo, Spinner } from '@/presentation/components'
 import Context from '@/presentation/context/form'
@@ -7,12 +7,13 @@ import { Validation } from '@/presentation/protocols/validation'
 import { Authentication } from '@/domain/usecases'
 
 type Props = {
-  validation?: Validation
-  authentication?: Authentication
+  validation: Validation
+  authentication: Authentication
 }
 
 const login: React.FC<Props> = ({ validation, authentication }: Props) => {
-  const navigate = useNavigate()
+  // console.log(validation)
+  const history = useHistory()
   const [state, setState] = useState({
     isLoading: false,
     email: '',
@@ -30,6 +31,7 @@ const login: React.FC<Props> = ({ validation, authentication }: Props) => {
     })
   }, [state.email, state.password])
 
+  // console.log(state)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
 
@@ -47,7 +49,7 @@ const login: React.FC<Props> = ({ validation, authentication }: Props) => {
       })
 
       localStorage.setItem('accessToken', account.accessToken)
-      navigate('/', { replace: true })
+      history.replace('/')
     } catch (error) {
       setState({
         ...state,
