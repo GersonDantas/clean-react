@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import Styles from './input-styles.scss'
-import Context from '@/presentation/context/form'
+import Context from '@/presentation/context/form/form'
 
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
