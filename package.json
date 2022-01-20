@@ -6,10 +6,11 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "test": "jest --passWithNoTests --no-cache --runInBand",
-    "test:watch": "npm run test -- --watch",
-    "test:staged": "npm run test -- --findRelatedTests",
-    "test:ci": "npm run test -- --coverage",
+    "test:watch": "npm test -- --watch",
+    "test:staged": "npm test -- --findRelatedTests",
+    "test:ci": "npm test -- --coverage",
     "test:coveralls": "npm run test:ci && coveralls < coverage/lcov.info",
+    "check": "npm-check -u -s",
     "prepare": "husky install"
   },
   "keywords": [],
