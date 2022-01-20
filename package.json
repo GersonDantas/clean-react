@@ -16,7 +16,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@testing-library/react": "^12.1.2",
+    "@testing-libr ary/react": "^12.1.2",
     "@types/axios": "^0.14.0",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.12",
