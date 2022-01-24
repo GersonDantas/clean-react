@@ -141,8 +141,8 @@ O objetivo do treinamento é mostrar como criar um sistema em ReactJs utilizando
 * Testes e2e
 * Cobertura de Testes
 * Test Doubles
-* Mocks
-* Stubs
-* Spies
-* Fakes
-* Dummies
+    * Mocks
+    * Stubs
+    * Spies
+    * Fakes
+    * Dummies
