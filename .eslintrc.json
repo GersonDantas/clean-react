@@ -20,6 +20,8 @@
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "react/prop-types": "off",
-    "@typescript-eslint/indent": "off"
+    "@typescript-eslint/indent": "off",
+    "require-await": "off",
+    "@typescript-eslint/require-await": "off"
   }
 }

@@ -19,6 +19,7 @@
   "devDependencies": {
     "@testing-library/react": "^12.1.2",
     "@types/axios": "^0.14.0",
+    "@types/faker": "^5.1.2",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.12",
     "@types/react": "^17.0.37",
@@ -35,8 +36,8 @@
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-standard": "^5.0.0",
-    "faker": "^5.5.3",
-    "git-commit-msg-linter": "^3.2.8",
+    "faker": "^5.1.0",
+    "git-commit-msg-linter": "^4.0.7",
     "husky": "^7.0.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.4.3",
@@ -53,7 +54,6 @@
     "webpack-dev-server": "^4.6.0"
   },
   "dependencies": {
-    "@types/faker": "^6.6.9",
     "axios": "^0.24.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
