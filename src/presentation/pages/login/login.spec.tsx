@@ -2,16 +2,25 @@ import React from 'react'
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 import faker from 'faker'
-import 'jest-localstorage-mock'
 import { Login } from '..'
-import { render, RenderResult, fireEvent, cleanup, waitFor } from '@testing-library/react'
-import { ValidationStub } from '@/presentation/test'
-import { AuthenticationSpy } from '@/presentation/test/mock-authentication'
+import {
+  render,
+  RenderResult,
+  fireEvent,
+  cleanup,
+  waitFor
+} from '@testing-library/react'
+import {
+  ValidationStub,
+  SaveAccessTokenMock,
+  AuthenticationSpy
+} from '@/presentation/test'
 import { InvalidCredentialsError } from '@/domain/errors'
 
 type SutTypes = {
   sut: RenderResult
   authenticationSpy: AuthenticationSpy
+  saveAccessTokenMock: SaveAccessTokenMock
 }
 
 type SutParams = {
@@ -22,13 +31,18 @@ const history = createMemoryHistory({ initialEntries: ['/login'] })
 const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub()
   const authenticationSpy = new AuthenticationSpy()
+  const saveAccessTokenMock = new SaveAccessTokenMock()
   validationStub.errorMessage = params?.validationError // só deixo o campo limpo se não tiver error
   const sut = render(
     <Router history={history}>
-      <Login validation={validationStub} authentication={authenticationSpy} />
+      <Login
+        validation={validationStub}
+        authentication={authenticationSpy}
+        saveAccessToken={saveAccessTokenMock}
+      />
     </Router>
   )
-  return { sut, authenticationSpy }
+  return { sut, authenticationSpy, saveAccessTokenMock }
 }
 
 const simulateValidSubmit = async (
@@ -43,12 +57,18 @@ const simulateValidSubmit = async (
   await waitFor(() => form)
 }
 
-const populateEmailField = (sut: RenderResult, email = faker.internet.email()): void => {
+const populateEmailField = (
+  sut: RenderResult,
+  email = faker.internet.email()
+): void => {
   const emailInput = sut.getByTestId('email')
   fireEvent.input(emailInput, { target: { value: email } })
 }
 
-const populatePasswordField = (sut: RenderResult, password = faker.internet.password()): void => {
+const populatePasswordField = (
+  sut: RenderResult,
+  password = faker.internet.password()
+): void => {
   const passwordInput = sut.getByTestId('password')
   fireEvent.input(passwordInput, { target: { value: password } })
 }
@@ -74,22 +94,26 @@ const testElementExists = (sut: RenderResult, fieldName: string): void => {
   expect(el).toBeTruthy()
 }
 
-const testButtonIsDIsabled = (sut: RenderResult, fieldName: string, isDisabled: boolean): void => {
+const testButtonIsDIsabled = (
+  sut: RenderResult,
+  fieldName: string,
+  isDisabled: boolean
+): void => {
   const button = sut.getByTestId(fieldName) as HTMLButtonElement // fazendo cache para button
   expect(button.disabled).toBe(isDisabled)
 }
 
-const testElementText = (sut: RenderResult, fieldName: string, text: string): void => {
+const testElementText = (
+  sut: RenderResult,
+  fieldName: string,
+  text: string
+): void => {
   const el = sut.getByTestId(fieldName)
   expect(el.textContent).toBe(text)
 }
 
 describe('Login component', () => {
   afterEach(cleanup)
-
-  beforeEach(() => {
-    localStorage.clear()
-  })
 
   test('Should start initial with state', () => {
     const validationError = faker.random.words()
@@ -164,17 +188,29 @@ describe('Login component', () => {
   test('Should present error if authentication fails', async () => {
     const { sut, authenticationSpy } = makeSut()
     const error = new InvalidCredentialsError()
-    jest.spyOn(authenticationSpy, 'auth').mockReturnValueOnce(Promise.reject(error))
+    jest
+      .spyOn(authenticationSpy, 'auth')
+      .mockReturnValueOnce(Promise.reject(error))
     await simulateValidSubmit(sut)
     testElementText(sut, 'main-error', error.message)
     testErrorWrapChildCount(sut, 1) // um filho, spinner não aparece, só error
   })
 
-  test('Should add accessToken to localStorage on success', async () => {
-    const { sut, authenticationSpy } = makeSut()
+  test('Should present error if SaveAccessToken fails', async () => {
+    const { sut, saveAccessTokenMock } = makeSut()
+    const error = new InvalidCredentialsError()
+    jest
+      .spyOn(saveAccessTokenMock, 'save')
+      .mockReturnValueOnce(Promise.reject(error))
     await simulateValidSubmit(sut)
-    expect(localStorage.setItem).toHaveBeenCalledWith(
-      'accessToken',
+    testElementText(sut, 'main-error', error.message)
+    testErrorWrapChildCount(sut, 1) // um filho, spinner não aparece, só error
+  })
+
+  test('Should call SaveAccessToken on success', async () => {
+    const { sut, authenticationSpy, saveAccessTokenMock } = makeSut()
+    await simulateValidSubmit(sut)
+    expect(saveAccessTokenMock.accessToken).toBe(
       authenticationSpy.account.accessToken
     ) // que ele seja chamado com...
     expect(history.length).toBe(1)
