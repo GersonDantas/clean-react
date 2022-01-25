@@ -10,7 +10,7 @@
 
 ---
 
-## [**Link para o curso completo**](https://www.udemy.com/course/react-com-mango/?referralCode=552F88858EAE76346C8B)
+## [**Link do arquivo notion com resumo da construção**](https://river-math-03e.notion.site/Curso-ReactJS-Hooks-TDD-Clean-Architecture-SOLID-e-Patterns-370d9d8484f84a94aefa0d043d687eb5)
 
 Essa sistema faz parte do treinamento do professor Rodrigo Manguinho (Mango) na Udemy.
 
