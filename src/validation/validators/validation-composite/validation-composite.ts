@@ -13,7 +13,7 @@ export class ValidationComposite implements Validation {
     // console.log(fieldValue)
     for (const validator of validators) {
       const error = validator.validate(fieldValue)
-    // console.log(error)
+      // console.log(error)
       if (error) {
         return error.message
       }
