@@ -4,7 +4,7 @@ export enum HttpStatusCode {
   badRequest = 400,
   unauthorized = 401,
   forbidden = 403,
-  notfound = 404,
+  notFound = 404,
   serverError = 500
 }
 
