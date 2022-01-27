@@ -13,7 +13,8 @@ import {
 import {
   ValidationStub,
   SaveAccessTokenMock,
-  AuthenticationSpy
+  AuthenticationSpy,
+  Helper
 } from '@/presentation/test'
 import { InvalidCredentialsError } from '@/domain/errors'
 
@@ -73,34 +74,9 @@ const populatePasswordField = (
   fireEvent.input(passwordInput, { target: { value: password } })
 }
 
-const testStatusForField = (
-  sut: RenderResult,
-  fieldName: string,
-  validationError?: string
-): void => {
-  const fieldStatus = sut.getByTestId(`${fieldName}-status`)
-  // console.log(fieldStatus.title, validationError)
-  expect(fieldStatus.title).toBe(validationError || 'Tudo certo!')
-  expect(fieldStatus.textContent).toBe(validationError ? '🔴' : '🟢')
-}
-
-const testErrorWrapChildCount = (sut: RenderResult, count: number): void => {
-  const errorWrap = sut.getByTestId('error-wrap')
-  expect(errorWrap.childElementCount).toBe(count)
-}
-
 const testElementExists = (sut: RenderResult, fieldName: string): void => {
   const el = sut.getByTestId(fieldName)
   expect(el).toBeTruthy()
-}
-
-const testButtonIsDIsabled = (
-  sut: RenderResult,
-  fieldName: string,
-  isDisabled: boolean
-): void => {
-  const button = sut.getByTestId(fieldName) as HTMLButtonElement // fazendo cache para button
-  expect(button.disabled).toBe(isDisabled)
 }
 
 const testElementText = (
@@ -118,43 +94,43 @@ describe('Login component', () => {
   test('Should start initial with state', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
-    testErrorWrapChildCount(sut, 0)
-    testButtonIsDIsabled(sut, 'submit', true)
-    testStatusForField(sut, 'email', validationError)
-    testStatusForField(sut, 'password', validationError)
+    Helper.testChildCount(sut, 'error-wrap', 0)
+    Helper.testButtonIsDIsabled(sut, 'submit', true)
+    Helper.testStatusForField(sut, 'email', validationError)
+    Helper.testStatusForField(sut, 'password', validationError)
   })
 
   test('Should show email error if Validation fails', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
     populateEmailField(sut)
-    testStatusForField(sut, 'email', validationError)
+    Helper.testStatusForField(sut, 'email', validationError)
   })
 
   test('Should show password error if Validation fails', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
     populatePasswordField(sut)
-    testStatusForField(sut, 'password', validationError)
+    Helper.testStatusForField(sut, 'password', validationError)
   })
 
   test('Should show valid email state if Validation succeeds', () => {
     const { sut } = makeSut()
     populateEmailField(sut)
-    testStatusForField(sut, 'email')
+    Helper.testStatusForField(sut, 'email')
   })
 
   test('Should show valid state password if Validation succeeds', () => {
     const { sut } = makeSut()
     populatePasswordField(sut)
-    testStatusForField(sut, 'password')
+    Helper.testStatusForField(sut, 'password')
   })
 
   test('Should enable submit button if form is valid', () => {
     const { sut } = makeSut()
     populateEmailField(sut)
     populatePasswordField(sut)
-    testButtonIsDIsabled(sut, 'submit', false)
+    Helper.testButtonIsDIsabled(sut, 'submit', false)
   })
 
   test('Should show spinner on submit ', async () => {
@@ -193,7 +169,7 @@ describe('Login component', () => {
       .mockReturnValueOnce(Promise.reject(error))
     await simulateValidSubmit(sut)
     testElementText(sut, 'main-error', error.message)
-    testErrorWrapChildCount(sut, 1) // um filho, spinner não aparece, só error
+    Helper.testChildCount(sut, 'error-wrap', 1) // um filho, spinner não aparece, só error
   })
 
   test('Should present error if SaveAccessToken fails', async () => {
@@ -204,7 +180,7 @@ describe('Login component', () => {
       .mockReturnValueOnce(Promise.reject(error))
     await simulateValidSubmit(sut)
     testElementText(sut, 'main-error', error.message)
-    testErrorWrapChildCount(sut, 1) // um filho, spinner não aparece, só error
+    Helper.testChildCount(sut, 'error-wrap', 1) // um filho, spinner não aparece, só error
   })
 
   test('Should call SaveAccessToken on success', async () => {
