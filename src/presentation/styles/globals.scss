@@ -14,6 +14,7 @@ body {
 }
 
 input[type='password'],
+input[type='text'],
 input[type='email'] {
   border: 1px solid $primaryLight;
   line-height: 40px;

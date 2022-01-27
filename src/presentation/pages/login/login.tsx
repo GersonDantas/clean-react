@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import Styles from './login-styles.scss'
-import { Footer, FormStatus, Header, Input, Logo, Spinner } from '@/presentation/components'
+import {
+  Footer,
+  FormStatus,
+  Header,
+  Input,
+  Logo,
+  Spinner
+} from '@/presentation/components'
 import Context from '@/presentation/context/form/form'
 import { Validation } from '@/presentation/protocols/validation'
 import { Authentication, SaveAccessToken } from '@/domain/usecases'
@@ -12,7 +19,11 @@ type Props = {
   saveAccessToken: SaveAccessToken
 }
 
-const login: React.FC<Props> = ({ validation, authentication, saveAccessToken }: Props) => {
+const Login: React.FC<Props> = ({
+  validation,
+  authentication,
+  saveAccessToken
+}: Props) => {
   // console.log(validation)
   const history = useHistory()
   const [state, setState] = useState({
@@ -33,7 +44,9 @@ const login: React.FC<Props> = ({ validation, authentication, saveAccessToken }:
   }, [state.email, state.password])
 
   // console.log(state)
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault()
 
     try {
@@ -63,10 +76,18 @@ const login: React.FC<Props> = ({ validation, authentication, saveAccessToken }:
     <div className={Styles.login}>
       <Header />
       <Context.Provider value={{ state, setState }}>
-        <form data-testid="form" className={Styles.form} onSubmit={handleSubmit}>
+        <form
+          data-testid="form"
+          className={Styles.form}
+          onSubmit={handleSubmit}
+        >
           <h2>Login</h2>
           <Input type="email" name="email" placeholder="Digite seu email" />
-          <Input type="password" name="password" placeholder="Digite sua senha" />
+          <Input
+            type="password"
+            name="password"
+            placeholder="Digite sua senha"
+          />
 
           <button
             data-testid="submit"
@@ -90,4 +111,4 @@ const login: React.FC<Props> = ({ validation, authentication, saveAccessToken }:
   )
 }
 
-export default login
+export default Login
