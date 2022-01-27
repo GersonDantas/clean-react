@@ -1,26 +1,56 @@
 import React from 'react'
+import faker from 'faker'
+import {
+  RenderResult,
+  render,
+  cleanup,
+  fireEvent
+} from '@testing-library/react'
 import { SignUp } from '@/presentation/pages'
-import { RenderResult, render } from '@testing-library/react'
-import { Helper } from '@/presentation/test'
+import { Helper, ValidationStub } from '@/presentation/test'
 
 type SutTypes = {
   sut: RenderResult
 }
 
-const makeSut = (): SutTypes => {
-  const sut = render(<SignUp />)
+type SutParams = {
+  validationError: string
+}
+
+const populateField = (
+  sut: RenderResult,
+  fieldName: string,
+  value = faker.internet.email()
+): void => {
+  const emailInput = sut.getByTestId(fieldName)
+  fireEvent.input(emailInput, { target: { value } })
+}
+
+const makeSut = (params?: SutParams): SutTypes => {
+  const validationStub = new ValidationStub()
+  validationStub.errorMessage = params?.validationError // só deixo o campo limpo se não tiver error
+  const sut = render(<SignUp validation={validationStub} />)
   return { sut }
 }
 
 describe('SignUp component', () => {
+  afterEach(cleanup)
+
   test('Should start initial with state', () => {
-    const validationError = 'Campo obrigatório'
-    const { sut } = makeSut()
+    const validationError = faker.random.words()
+    const { sut } = makeSut({ validationError })
     Helper.testChildCount(sut, 'error-wrap', 0)
     Helper.testButtonIsDIsabled(sut, 'submit', true)
     Helper.testStatusForField(sut, 'name', validationError)
-    Helper.testStatusForField(sut, 'email', validationError)
-    Helper.testStatusForField(sut, 'password', validationError)
-    Helper.testStatusForField(sut, 'passwordConfirmation', validationError)
+    Helper.testStatusForField(sut, 'email', 'Campo obrigatório')
+    Helper.testStatusForField(sut, 'password', 'Campo obrigatório')
+    Helper.testStatusForField(sut, 'passwordConfirmation', 'Campo obrigatório')
+  })
+
+  test('Should show name error if Validation fails', () => {
+    const validationError = faker.random.words()
+    const { sut } = makeSut({ validationError })
+    populateField(sut, 'name')
+    Helper.testStatusForField(sut, 'name', validationError)
   })
 })
