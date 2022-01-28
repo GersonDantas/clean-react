@@ -38,3 +38,11 @@ export const populateField = (
   const emailInput = sut.getByTestId(fieldName)
   fireEvent.input(emailInput, { target: { value } })
 }
+
+export const testElementExists = (
+  sut: RenderResult,
+  fieldName: string
+): void => {
+  const el = sut.getByTestId(fieldName)
+  expect(el).toBeTruthy()
+}
