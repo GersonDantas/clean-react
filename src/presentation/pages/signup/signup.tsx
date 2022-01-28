@@ -14,10 +14,11 @@ const SignUp: React.FC<Props> = ({ validation }: Props) => {
     name: '',
     email: '',
     password: '',
+    passwordConfirmation: '',
     nameError: '',
     emailError: '',
     passwordError: '',
-    passwordConfirmationError: 'Campo obrigatório',
+    passwordConfirmationError: '',
     mainError: ''
   })
 
@@ -26,7 +27,11 @@ const SignUp: React.FC<Props> = ({ validation }: Props) => {
       ...state,
       nameError: validation.validate('name', state.name),
       emailError: validation.validate('email', state.email),
-      passwordError: validation.validate('email', state.email)
+      passwordError: validation.validate('password', state.password),
+      passwordConfirmationError: validation.validate(
+        'passwordConfirmation',
+        state.passwordConfirmation
+      )
     })
   }, [state.name, state.email])
   return (
