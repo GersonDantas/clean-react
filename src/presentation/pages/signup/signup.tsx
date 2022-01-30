@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Footer, FormStatus, Header, Input } from '@/presentation/components'
 import Context from '@/presentation/context/form/form'
 import { Validation } from '@/presentation/protocols/validation'
@@ -101,7 +101,6 @@ const SignUp: React.FC<Props> = ({
             name="passwordConfirmation"
             placeholder="Repita sua senha"
           />
-
           <button
             disabled={
               !!state.nameError ||
@@ -115,9 +114,15 @@ const SignUp: React.FC<Props> = ({
           >
             Cadastrar
           </button>
-
-          <span className={Styles.link}>Voltar para Login</span>
-
+          <Link
+            data-testid="login-link"
+            replace
+            to="/login"
+            className={Styles.link}
+          >
+            Voltar para Login
+          </Link>
+          s
           <FormStatus />
         </form>
       </Context.Provider>
