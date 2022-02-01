@@ -60,7 +60,7 @@ const SignUp: React.FC<Props> = ({
         !!passwordError ||
         !!passwordConfirmationError
     })
-  }, [state.name, state.email])
+  }, [state.name, state.email, state.password, state.passwordConfirmation])
 
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
@@ -122,7 +122,6 @@ const SignUp: React.FC<Props> = ({
           >
             Voltar para Login
           </Link>
-          s
           <FormStatus />
         </form>
       </Context.Provider>
