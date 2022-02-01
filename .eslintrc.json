@@ -15,6 +15,7 @@
     "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/comma-spacing": "off",
     "require-await": "off",
+    "space-before-function-paren": ["error", "always"],
     "@typescript-eslint/require-await": "off",
     "@typescript-eslint/no-namespace": "off",
     "@typescript-eslint/no-unused-vars": "off",
