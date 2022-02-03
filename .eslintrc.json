@@ -4,10 +4,20 @@
       "version": "detect"
     }
   },
-  "extends": ["standard-with-typescript", "plugin:react/recommended"],
-  "plugins": ["react"],
+  "extends": [
+    "standard-with-typescript",
+    "plugin:react/recommended",
+    "plugin:cypress/recommended"
+  ],
+  "plugins": [
+    "react",
+    "cypress"
+  ],
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "project": "./tsconfig-eslint.json"
+  },
+  "env": {
+    "cypress/globals": true
   },
   "rules": {
     "@typescript-eslint/consistent-type-definitions": "off",
@@ -15,7 +25,10 @@
     "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/comma-spacing": "off",
     "require-await": "off",
-    "space-before-function-paren": ["error", "always"],
+    "space-before-function-paren": [
+      "error",
+      "always"
+    ],
     "@typescript-eslint/require-await": "off",
     "@typescript-eslint/no-namespace": "off",
     "@typescript-eslint/no-unused-vars": "off",

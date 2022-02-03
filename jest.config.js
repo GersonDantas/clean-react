@@ -8,6 +8,10 @@ module.exports = {
     '!**/*.d.ts'
   ], // quer dizer que eu não quero fazer coverage dele
   coverageDirectory: 'coverage',
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/src/main/test/cypress'
+  ],
   testEnvironment: 'jsdom',
   transform: {
     '.+\\.(ts|tsx)$': 'ts-jest'
