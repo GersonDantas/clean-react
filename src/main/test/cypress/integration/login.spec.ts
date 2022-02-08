@@ -103,7 +103,7 @@ describe('Login', () => {
     })
     cy.getByTestId('email').focus().type(faker.internet.email())
     cy.getByTestId('password').focus().type(faker.random.alphaNumeric(6))
-    cy.getByTestId('submit').click()
+      .type('{enter}')
     cy.getByTestId('spinner').should('not.exist')
     cy.getByTestId('main-error').should('contain.text', 'Algo de errado aconteceu. Tente novamente em breve')
     cy.url().should('eq', `${baseUrl}/login`)
@@ -120,5 +120,17 @@ describe('Login', () => {
     cy.getByTestId('password').focus().type(faker.random.alphaNumeric(6))
     cy.getByTestId('submit').dblclick()
     cy.get('@request.all').should('have.length', 1)
+  })
+
+  it('Should not call submit if form is invalid', () => {
+    cy.intercept('POST', /login/, {
+      statusCode: 200,
+      body: {
+        invalidProperty: faker.datatype.uuid()
+      }
+    }).as('request')
+    cy.getByTestId('email').focus().type(faker.internet.email())
+    cy.getByTestId('submit').click()
+    cy.get('@request.all').should('have.length', 0)
   })
 })
