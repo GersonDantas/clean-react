@@ -37,7 +37,7 @@ describe('SignUp', () => {
     FormHelper.testInputStatus('name')
     cy.getByTestId('email').focus().type(faker.internet.email())
     FormHelper.testInputStatus('email')
-    const password = faker.random.alphaNumeric(6)
+    const password = faker.random.alphaNumeric(5)
     cy.getByTestId('password').focus().type(password)
     FormHelper.testInputStatus('password')
     cy.getByTestId('passwordConfirmation').focus().type(password)
