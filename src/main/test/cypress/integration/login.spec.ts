@@ -2,9 +2,13 @@ import * as FormHelper from '../support/form-helper'
 import * as Http from '../support/login-mocks'
 import faker from 'faker'
 
-const simulateValidSubmit = (): void => {
+const populateField = (): void => {
   cy.getByTestId('email').focus().type(faker.internet.email())
-  cy.getByTestId('password').focus().type(faker.random.alphaNumeric(5))
+  cy.getByTestId('passwordConfirmation').focus().type(faker.random.alphaNumeric(7))
+}
+
+const simulateValidSubmit = (): void => {
+  populateField()
   cy.getByTestId('submit').click()
 }
 
@@ -67,10 +71,10 @@ describe('Login', () => {
     FormHelper.testUrl('/')
     FormHelper.testLocalStorageItem('accessToken')
   })
+
   it('Should present multiple submits', () => {
     Http.mockOk()
-    cy.getByTestId('email').focus().type(faker.internet.email())
-    cy.getByTestId('password').focus().type(faker.random.alphaNumeric(6))
+    populateField()
     cy.getByTestId('submit').dblclick()
     FormHelper.testHttpCallsCount(1)
   })
