@@ -21,7 +21,7 @@ const makeSut = (url = faker.internet.url()): SutTypes => {
   }
 }
 
-describe.only('RemoteLoadSurveyList', () => {
+describe('RemoteLoadSurveyList', () => {
   test('should call HttpGetClient with correct URL', async () => {
     const url = faker.internet.url()
     const { sut, httpGetClientSpy } = makeSut(url)
