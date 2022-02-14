@@ -20,8 +20,8 @@ const makeSut = (url = faker.internet.url()): SutTypes => {
   }
 }
 
-describe('RemoteLoadSurveyList', () => {
-  test.only('should call HttpGetClient with correct URL', async () => {
+describe.only('RemoteLoadSurveyList', () => {
+  test('should call HttpGetClient with correct URL', async () => {
     const url = faker.internet.url()
     const { sut, httpGetClientSpy } = makeSut(url)
     await sut.loadAll()
@@ -32,6 +32,15 @@ describe('RemoteLoadSurveyList', () => {
     const { sut, httpGetClientSpy } = makeSut()
     httpGetClientSpy.response = {
       statusCode: HttpStatusCode.forbidden
+    }
+    const promise = sut.loadAll()
+    await expect(promise).rejects.toThrow(new UnexpectedError())
+  })
+
+  test('Should throw UnexpectedError if HttpPostClient returns 404', async () => {
+    const { sut, httpGetClientSpy } = makeSut()
+    httpGetClientSpy.response = {
+      statusCode: HttpStatusCode.notFound
     }
     const promise = sut.loadAll()
     await expect(promise).rejects.toThrow(new UnexpectedError())
