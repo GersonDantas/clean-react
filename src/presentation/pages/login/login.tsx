@@ -79,7 +79,7 @@ const Login: React.FC<Props> = ({
   }
 
   return (
-    <div className={Styles.login}>
+    <div className={Styles.loginWrap}>
       <Header />
       <Context.Provider value={{ state, setState }}>
         <form
