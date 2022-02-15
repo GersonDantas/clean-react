@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 import {
   Footer,
   FormStatus,
-  Header,
+  LoginHeader,
   Input,
   SubmitButton
 } from '@/presentation/components'
@@ -93,7 +93,7 @@ const SignUp: React.FC<Props> = ({
 
   return (
     <div className={Styles.signupWrap}>
-      <Header />
+      <LoginHeader />
       <Context.Provider value={{ state, setState }}>
         <form
           data-testid="form"

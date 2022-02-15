@@ -4,7 +4,7 @@ import Styles from './login-styles.scss'
 import {
   Footer,
   FormStatus,
-  Header,
+  LoginHeader,
   Input,
   SubmitButton
 } from '@/presentation/components'
@@ -80,7 +80,7 @@ const Login: React.FC<Props> = ({
 
   return (
     <div className={Styles.loginWrap}>
-      <Header />
+      <LoginHeader />
       <Context.Provider value={{ state, setState }}>
         <form
           data-testid="form"
