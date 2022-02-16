@@ -1,18 +1,24 @@
 @import '../../styles/colors.scss';
 
-.header {
-  display: flex;
-  flex-direction: column;
-  border-top: solid 40px $primaryDark;
+.headerWrap {
+  display         : flex;
+  flex-direction  : column;
+  border-top      : solid 40px $primaryDark;
   background-color: $primary;
-  align-items: center;
+  align-items     : center;
 
   img {
     margin-top: 40px;
   }
 
   h1 {
-    color: $white;
+    color : $white;
     margin: 16px 0px 40px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .headerWrap {
+    border-top-width: 20px;
   }
 }
