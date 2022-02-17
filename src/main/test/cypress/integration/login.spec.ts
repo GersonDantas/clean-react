@@ -4,7 +4,7 @@ import faker from 'faker'
 
 const populateField = (): void => {
   cy.getByTestId('email').focus().type(faker.internet.email())
-  cy.getByTestId('passwordConfirmation').focus().type(faker.random.alphaNumeric(7))
+  cy.getByTestId('password').focus().type(faker.random.alphaNumeric(7))
 }
 
 const simulateValidSubmit = (): void => {
@@ -65,11 +65,11 @@ describe('Login', () => {
     FormHelper.testUrl('/login')
   })
 
-  it('Should present save accessToken if valid credentials are provided', () => {
+  it('Should present save account if valid credentials are provided', () => {
     Http.mockOk()
     simulateValidSubmit()
     FormHelper.testUrl('/')
-    FormHelper.testLocalStorageItem('accessToken')
+    FormHelper.testLocalStorageItem('account')
   })
 
   it('Should present multiple submits', () => {

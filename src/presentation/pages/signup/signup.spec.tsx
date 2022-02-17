@@ -13,7 +13,7 @@ import { SignUp } from '@/presentation/pages'
 import {
   AddAccountSpy,
   Helper,
-  SaveAccessTokenMock,
+  UpdateCurrentAccountMock,
   ValidationStub
 } from '@/presentation/test'
 import { EmailInUserError } from '@/domain/errors'
@@ -21,7 +21,7 @@ import { EmailInUserError } from '@/domain/errors'
 type SutTypes = {
   sut: RenderResult
   addAccountSpy: AddAccountSpy
-  saveAccessTokenMock: SaveAccessTokenMock
+  updateCurrentAccountMock: UpdateCurrentAccountMock
 }
 
 type SutParams = {
@@ -34,17 +34,17 @@ const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub()
   validationStub.errorMessage = params?.validationError // só deixo o campo limpo se não tiver error
   const addAccountSpy = new AddAccountSpy()
-  const saveAccessTokenMock = new SaveAccessTokenMock()
+  const updateCurrentAccountMock = new UpdateCurrentAccountMock()
   const sut = render(
     <Router history={history}>
       <SignUp
         validation={validationStub}
         addAccount={addAccountSpy}
-        saveAccessToken={saveAccessTokenMock}
+        updateCurrentAccount={updateCurrentAccountMock}
       />
     </Router>
   )
-  return { sut, addAccountSpy, saveAccessTokenMock }
+  return { sut, addAccountSpy, updateCurrentAccountMock }
 }
 
 const simulateValidSubmit = async (
@@ -180,20 +180,20 @@ describe('SignUp component', () => {
     Helper.testChildCount(sut, 'error-wrap', 1) // um filho, spinner não aparece, só error
   })
 
-  test('Should call SaveAccessToken on success', async () => {
-    const { sut, addAccountSpy, saveAccessTokenMock } = makeSut()
+  test('Should call UpdateCurrentAccount on success', async () => {
+    const { sut, addAccountSpy, updateCurrentAccountMock } = makeSut()
     await simulateValidSubmit(sut)
-    expect(saveAccessTokenMock.accessToken).toBe(
-      addAccountSpy.account.accessToken
+    expect(updateCurrentAccountMock.account).toEqual(
+      addAccountSpy.account
     ) // que ele seja chamado com...
     expect(history.length).toBe(1)
     expect(history.location.pathname).toBe('/')
   })
 
   test('Should present error if SaveAccessToken fails', async () => {
-    const { sut, saveAccessTokenMock } = makeSut()
+    const { sut, updateCurrentAccountMock } = makeSut()
     const error = new EmailInUserError()
-    jest.spyOn(saveAccessTokenMock, 'save').mockRejectedValueOnce(error)
+    jest.spyOn(updateCurrentAccountMock, 'save').mockRejectedValueOnce(error)
     await simulateValidSubmit(sut)
     Helper.testElementText(sut, 'main-error', error.message)
     Helper.testChildCount(sut, 'error-wrap', 1) // um filho, spinner não aparece, só error
