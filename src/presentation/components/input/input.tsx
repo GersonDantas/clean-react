@@ -1,11 +1,11 @@
 import React, { useContext, useRef } from 'react'
 import Styles from './input-styles.scss'
-import Context from '@/presentation/context/form/form'
+import { FormContext } from '@/presentation/context'
 
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
 const Input: React.FC<Props> = (props: Props) => {
-  const { state, setState } = useContext(Context)
+  const { state, setState } = useContext(FormContext)
   const error = state[`${props.name}Error`]
   const inputRef = useRef<HTMLInputElement>()
 
