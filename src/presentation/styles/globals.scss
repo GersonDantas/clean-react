@@ -2,35 +2,36 @@
 
 * {
   font-family: 'Roboto', sans-serif;
-  font-size: 14px;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box; // deixa o tamanho no mesmo que eu setar, não aumentando a div
+  font-size  : 14px;
+  padding    : 0;
+  margin     : 0;
+  box-sizing : border-box; // deixa o tamanho no mesmo que eu setar, não aumentando a div
 }
 
 body {
   background-color: $background;
-  overflow: auto;
+  overflow        : auto;
 }
 
 input[type='password'],
 input[type='text'],
 input[type='email'] {
-  border: none;
+  border : none;
   outline: none;
 }
 
 button {
   background-color: $primary;
-  color: $white;
-  border-radius: 8px;
-  font-size: 16px;
-  line-height: 60px;
-  border: none;
+  color           : $white;
+  border-radius   : 8px;
+  font-size       : 16px;
+  line-height     : 60px;
+  border          : none;
+  padding         : 0px 16px;
 
   &:disabled {
     background-color: $disabledBackground;
-    color: $disableColor;
+    color           : $disableColor;
 
     &:hover {
       opacity: 1;

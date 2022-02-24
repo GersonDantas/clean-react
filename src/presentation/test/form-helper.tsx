@@ -20,9 +20,3 @@ export const populateField = (
   const emailInput = screen.getByTestId(fieldName)
   fireEvent.input(emailInput, { target: { value } })
 }
-
-export const testElementExists = (
-  fieldName: string
-): void => {
-  expect(screen.queryByTestId(fieldName)).toBeTruthy()
-}
