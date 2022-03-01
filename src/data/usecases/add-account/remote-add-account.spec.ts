@@ -1,4 +1,4 @@
-import { RemoteAddAccount } from './remote-add-account'
+import { RemoteAddAccount } from '@/data/usecases'
 import { HttpStatusCode } from '@/data/protocols/http'
 import { HttpPostClientSpy } from '@/data/test'
 import { EmailInUserError, UnexpectedError } from '@/domain/errors'

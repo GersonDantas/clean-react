@@ -1,4 +1,4 @@
-import { RemoteAuthentication } from './remote-authentication'
+import { RemoteAuthentication } from '@/data/usecases'
 import { HttpStatusCode } from '@/data/protocols/http'
 import { HttpPostClientSpy } from '@/data/test'
 import { InvalidCredentialsError, UnexpectedError } from '@/domain/errors'

@@ -1,5 +1,5 @@
+import { LoadSurveyList } from '@/domain/usecases'
 import faker from 'faker'
-import { LoadSurveyList } from '../usecases'
 
 export const mockSurveyModel = (): LoadSurveyList.Model => ({
   id: faker.datatype.uuid(),
@@ -13,6 +13,7 @@ export const mockSurveyListModel = (): LoadSurveyList.Model[] => ([
   mockSurveyModel(),
   mockSurveyModel()
 ])
+
 export class LoadSurveyListSpy implements LoadSurveyList {
   callsCount = 0
   surveys = mockSurveyListModel()
