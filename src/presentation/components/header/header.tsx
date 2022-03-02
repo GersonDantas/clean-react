@@ -6,7 +6,7 @@ import React, { memo, useContext } from 'react'
 
 const Header: React.FC = () => {
   const history = useHistory()
-  const { setCurrentAccount } = useContext(ApiContext)
+  const { setCurrentAccount, getCurrentAccount } = useContext(ApiContext)
   const logout = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
     e.preventDefault()
     setCurrentAccount(undefined)
@@ -17,7 +17,7 @@ const Header: React.FC = () => {
       <div className={Styles.headerContent}>
         <Logo />
         <div className={Styles.logoutWrap}>
-          <span>Gerson</span>
+          <span data-testid="username">{getCurrentAccount().name}</span>
           <a data-testid="logout" href="#" onClick={logout} >Sair</a>
         </div>
       </div>
