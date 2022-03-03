@@ -47,7 +47,6 @@ const Login: React.FC<Props> = ({
     })
   }, [state.email, state.password])
 
-  // console.log(state)
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
