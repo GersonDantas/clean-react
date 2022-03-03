@@ -28,6 +28,7 @@ button {
   line-height     : 60px;
   border          : none;
   padding         : 0px 16px;
+  cursor          : pointer;
 
   &:disabled {
     background-color: $disabledBackground;
