@@ -1,0 +1,27 @@
+@import '../../styles/colors.scss';
+
+.surveyListWrap {
+  display         : flex;
+  flex-direction  : column;
+  justify-content : space-between;
+  min-height      : 100vh;
+  background-color: $disabledBackground;
+
+  .contentWrap {
+    display       : flex;
+    flex-direction: column;
+    align-self    : center;
+    width         : 100%;
+    max-width     : 800px;
+    padding       : 40px;
+    flex-grow     : 1;
+
+    h2 {
+      color         : $primaryDark;
+      font-size     : 20px;
+      font-weight   : bold;
+      text-transform: uppercase;
+      margin-bottom : 24px;
+    }
+  }
+}
