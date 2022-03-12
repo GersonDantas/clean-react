@@ -1,7 +1,12 @@
-import * as FormHelpers from '../support/form-helpers'
-import * as Helpers from '../support/helpers'
-import * as Http from '../support/signup-mocks'
+import * as FormHelpers from '../utils/form-helpers'
+import * as Helpers from '../utils/helpers'
+import * as Http from '../utils/http-mocks'
 import faker from 'faker'
+
+const path = /signup/
+export const mockEmailInUseError = (): void => Http.mockForbiddenError(path, 'POST')
+export const mockUnexpectedError = (): void => Http.mockServerError(path, 'POST')
+export const mockSuccess = (): void => Http.mockOk(path, 'POST', 'account')
 
 const populateField = (): void => {
   cy.getByTestId('name').focus().type(faker.random.alphaNumeric(7))
@@ -62,35 +67,35 @@ describe('SignUp', () => {
   })
 
   it('Should present InvalidCredentialsError on 403', () => {
-    Http.mockEmailInUseError()
+    mockEmailInUseError()
     simulateValidSubmit()
     FormHelpers.testMainError('Esse email já está em uso')
     Helpers.testUrl('/signup')
   })
 
   it('Should present UnexpectedError on default error cases', () => {
-    Http.mockUnexpectedError()
+    mockUnexpectedError()
     simulateValidSubmit()
     FormHelpers.testMainError('Algo de errado aconteceu. Tente novamente em breve')
     Helpers.testUrl('/signup')
   })
 
   it('Should present save account if valid credentials are provided', () => {
-    Http.mockOk()
+    mockSuccess()
     simulateValidSubmit()
     Helpers.testUrl('/')
     Helpers.testLocalStorageItem('account')
   })
 
   it('Should present multiple submits', () => {
-    Http.mockOk()
+    mockSuccess()
     populateField()
     cy.getByTestId('submit').dblclick()
     Helpers.testHttpCallsCount(1)
   })
 
   it('Should not call submit if form is invalid', () => {
-    Http.mockOk()
+    mockSuccess()
     cy.getByTestId('email').focus().type(faker.internet.email()).type('{enter}')
     Helpers.testHttpCallsCount(0)
   })
