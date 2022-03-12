@@ -1,7 +1,7 @@
 import * as FormHelper from '../support/form-helpers'
 import * as Helpers from '../support/helpers'
 import * as Http from '../support/survey-list-mocks'
-import faker from 'faker'
+import faker, { helpers } from 'faker'
 
 describe('SurveyList', () => {
   beforeEach(() => {
@@ -25,5 +25,12 @@ describe('SurveyList', () => {
     cy.visit('')
     const account = Helpers.getLocalStorageItem('account')
     cy.getByTestId('username').should('contain.text', account.name)
+  })
+
+  it('Should logout on logout link click', () => {
+    Http.mockAccessDeniedError()
+    cy.visit('')
+    cy.getByTestId('logout').click()
+    Helpers.testUrl('/login')
   })
 })
