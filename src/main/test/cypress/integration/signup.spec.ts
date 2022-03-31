@@ -91,6 +91,7 @@ describe('SignUp', () => {
     mockSuccess()
     populateField()
     cy.getByTestId('submit').dblclick()
+    cy.wait('@request')
     Helpers.testHttpCallsCount(1)
   })
 
