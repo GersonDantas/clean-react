@@ -1,7 +1,6 @@
 import Styles from './header-styles.scss'
 import { Logo } from '@/presentation/components'
 import { ApiContext } from '@/presentation/context'
-import { useHistory } from 'react-router-dom'
 import React, { memo, useContext } from 'react'
 import { useLogout } from '@/presentation/hooks'
 

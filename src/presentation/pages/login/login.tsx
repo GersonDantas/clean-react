@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Styles from './login-styles.scss'
 import {
   Footer,
@@ -22,7 +22,7 @@ const Login: React.FC<Props> = ({
   authentication
 }: Props) => {
   const { setCurrentAccount } = useContext(ApiContext)
-  const history = useHistory()
+  const navigate = useNavigate()
   const [state, setState] = useState({
     isLoading: false,
     isFormInvalid: true,
@@ -61,7 +61,7 @@ const Login: React.FC<Props> = ({
         password: state.password
       })
       setCurrentAccount(account)
-      history.replace('/')
+      navigate('/', { replace: true })
     } catch (error) {
       setState({
         ...state,

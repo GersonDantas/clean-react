@@ -1,8 +1,5 @@
 import { useLogout } from '@/presentation/hooks'
-import { ApiContext } from '@/presentation/context'
 import { AccessDeniedError } from '@/domain/errors'
-import { useHistory } from 'react-router-dom'
-import { useContext } from 'react'
 
 type CallBackType = (error: Error) => void
 type ResultType = CallBackType

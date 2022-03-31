@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Footer,
   FormStatus,
@@ -22,7 +22,7 @@ const SignUp: React.FC<Props> = ({
   addAccount
 }: Props) => {
   const { setCurrentAccount } = useContext(ApiContext)
-  const history = useHistory()
+  const navigate = useNavigate()
   const [state, setState] = useState({
     isLoading: false,
     isFormInvalid: true,
@@ -99,7 +99,7 @@ const SignUp: React.FC<Props> = ({
         passwordConfirmation: state.passwordConfirmation
       })
       setCurrentAccount(account)
-      history.replace('/')
+      navigate('/', { replace: true })
     } catch (error) {
       setState({
         ...state,

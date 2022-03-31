@@ -28,7 +28,7 @@ const makeSut = (params?: SutParams): SutTypes => {
   const setCurrentAccountMock = jest.fn()
   render(
     <ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock }}>
-      <Router history={history}>
+      <Router navigator={history} location='/signup' >
         <SignUp
           validation={validationStub}
           addAccount={addAccountSpy}
@@ -175,7 +175,7 @@ describe('SignUp component', () => {
     expect(setCurrentAccountMock).toHaveBeenCalledWith(
       addAccountSpy.account
     ) // que ele seja chamado com...
-    expect(history.length).toBe(1)
+    expect(history.index).toBe(0)
     expect(history.location.pathname).toBe('/')
   })
 
@@ -183,7 +183,7 @@ describe('SignUp component', () => {
     makeSut()
     const loginLink = screen.getByTestId('login-link')
     fireEvent.click(loginLink)
-    expect(history.length).toBe(1)
+    expect(history.index).toBe(0)
     expect(history.location.pathname).toBe('/login')
   })
 })

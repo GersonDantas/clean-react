@@ -1,12 +1,12 @@
 import { ApiContext } from '@/presentation/context'
-import { Redirect, Route, RouteProps } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import React, { useContext } from 'react'
 
-const PrivateRoute: React.FC<RouteProps> = (props: RouteProps) => {
+const PrivateRoute: React.FC = ({ children }): any => {
   const { getCurrentAccount } = useContext(ApiContext)
   return getCurrentAccount()?.accessToken
-    ? <Route {...props} />
-    : <Route {...props} component={() => <Redirect to="/login" />} />
+    ? children
+    : <Navigate to="/login" />
 }
 
 export default PrivateRoute
