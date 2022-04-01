@@ -43,4 +43,13 @@ describe('RemoteLoadSurveyResult', () => {
     const promise = sut.load()
     expect(promise).rejects.toThrow(new UnexpectedError())
   })
+
+  test('Should throw AccessDeniedError if HttpGetClient returns 404', async () => {
+    const { sut, httpGetClientSpy } = makeSut()
+    httpGetClientSpy.response = {
+      statusCode: HttpStatusCode.serverError
+    }
+    const promise = sut.load()
+    expect(promise).rejects.toThrow(new UnexpectedError())
+  })
 })
