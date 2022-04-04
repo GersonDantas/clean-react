@@ -1,18 +1,16 @@
 export interface LoadSurveyResult {
-  loadAll (): Promise<LoadSurveyResult.Model[]>
-}
-
-type AnswersType = {
-  image?: string
-  answer: string
-  count: number
-  percent: number
+  load (): Promise<LoadSurveyResult.Model>
 }
 
 export namespace LoadSurveyResult {
   export type Model = {
     question: string
     date: Date
-    answers: AnswersType[]
+    answers: Array<{
+      image?: string
+      answer: string
+      count: number
+      percent: number
+    }>
   }
 }
