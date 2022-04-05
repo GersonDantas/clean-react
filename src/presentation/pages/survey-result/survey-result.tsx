@@ -8,28 +8,22 @@ const SurveyResult: React.FC = () => {
     <div className={Styles.surveyResultWrap}>
       <Header />
       <div className={Styles.contentWrap}>
-        <hgroup>
-          <Calendar date={new Date()} className={Styles.calendarWrap} />
-          <h2>Qual é seu framework web favorito?Qual é seu framework web favorito?Qual é seu framework web favorito?</h2>
-        </hgroup>
-        <FlipMove className={Styles.answersList}>
-          <li>
-            <img src="https://bognarjunior.files.wordpress.com/2018/03/if_react-js_logo_1174949.png" alt="react image" />
-            <span className={Styles.answer}>ReactJs</span>
-            <span className={Styles.percent}>50%</span>
-          </li>
-          <li className={Styles.active}>
-            <img src="https://bognarjunior.files.wordpress.com/2018/03/if_react-js_logo_1174949.png" alt="react image" />
-            <span className={Styles.answer}>ReactJs</span>
-            <span className={Styles.percent}>50%</span>
-          </li>
-          <li>
-            <img src="https://bognarjunior.files.wordpress.com/2018/03/if_react-js_logo_1174949.png" alt="react image" />
-            <span className={Styles.answer}>ReactJs</span>
-            <span className={Styles.percent}>50%</span>
-          </li>
-        </FlipMove>
-        <button>Voltar</button>
+        {false &&
+          <>
+            <hgroup>
+              <Calendar date={new Date()} className={Styles.calendarWrap} />
+              <h2>Qual é seu framework web favorito?Qual é seu framework web favorito?</h2>
+            </hgroup>
+            <FlipMove className={Styles.answersList}>
+              <li>
+                <img src="https://bognarjunior.files.wordpress.com/2018/03/if_react-js_logo_1174949.png" alt="react image" />
+                <span className={Styles.answer}>ReactJs</span>
+                <span className={Styles.percent}>50%</span>
+              </li>
+            </FlipMove>
+            <button>Voltar</button>
+          </>
+        }
         {false && <Loading />}
       </div>
       <Footer />
