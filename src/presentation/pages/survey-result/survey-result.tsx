@@ -20,6 +20,16 @@ const SurveyResult: React.FC = () => {
                 <span className={Styles.answer}>ReactJs</span>
                 <span className={Styles.percent}>50%</span>
               </li>
+              <li>
+                <img src="https://bognarjunior.files.wordpress.com/2018/03/if_react-js_logo_1174949.png" alt="react image" />
+                <span className={Styles.answer}>ReactJs</span>
+                <span className={Styles.percent}>50%</span>
+              </li>
+              <li>
+                <img src="https://bognarjunior.files.wordpress.com/2018/03/if_react-js_logo_1174949.png" alt="react image" />
+                <span className={Styles.answer}>ReactJs</span>
+                <span className={Styles.percent}>50%</span>
+              </li>
             </FlipMove>
             <button>Voltar</button>
           </>
