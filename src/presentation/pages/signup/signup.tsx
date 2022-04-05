@@ -66,8 +66,8 @@ const SignUp: React.FC<Props> = ({
       'passwordConfirmation',
       formData
     )
-    setState({
-      ...state,
+    setState(old => ({
+      ...old,
       nameError,
       emailError,
       passwordError,
@@ -77,7 +77,7 @@ const SignUp: React.FC<Props> = ({
         !!emailError ||
         !!passwordError ||
         !!passwordConfirmationError
-    })
+    }))
   }, [state.name, state.email, state.password, state.passwordConfirmation])
 
   const handleSubmit = async (
@@ -88,10 +88,10 @@ const SignUp: React.FC<Props> = ({
       if (state.isLoading || state.isFormInvalid) {
         return
       }
-      setState({
-        ...state,
+      setState(old => ({
+        ...old,
         isLoading: true
-      })
+      }))
       const account = await addAccount.add({
         name: state.name,
         email: state.email,
@@ -101,11 +101,11 @@ const SignUp: React.FC<Props> = ({
       setCurrentAccount(account)
       navigate('/', { replace: true })
     } catch (error) {
-      setState({
-        ...state,
+      setState(old => ({
+        ...old,
         isLoading: false,
         mainError: error.message
-      })
+      }))
     }
   }
 
