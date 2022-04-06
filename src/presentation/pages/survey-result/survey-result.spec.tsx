@@ -1,19 +1,18 @@
 import { ApiContext } from '@/presentation/context'
 import { SurveyResult } from '@/presentation/pages'
+import { UnexpectedError } from '@/domain/errors'
 import { LoadSurveyResultSpy, mockAccountModel, mockSurveyResultModel } from '@/domain/test'
 import { waitFor, render, screen } from '@testing-library/react'
-import React from 'react'
-import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
+import { Router } from 'react-router-dom'
+import React from 'react'
 
 type SutTypes = {
   loadSurveyResultSpy: LoadSurveyResultSpy
 }
 
-const makeSut = (surveyResult = mockSurveyResultModel()): SutTypes => {
+const makeSut = (loadSurveyResultSpy = new LoadSurveyResultSpy()): SutTypes => {
   const history = createMemoryHistory({ initialEntries: ['/surveys'] })
-  const loadSurveyResultSpy = new LoadSurveyResultSpy()
-  loadSurveyResultSpy.surveyResults = surveyResult
   render(
     <ApiContext.Provider value={{ setCurrentAccount: jest.fn(), getCurrentAccount: () => mockAccountModel() }}>
       <Router navigator={history} location='/surveys' >
@@ -43,10 +42,12 @@ describe('SurveyResult Component', () => {
   })
 
   test('Should present SurveyResult data on success', async () => {
+    const loadSurveyResultSpy = new LoadSurveyResultSpy()
     const surveyResult = Object.assign(mockSurveyResultModel(), {
       date: new Date('2022-03-19T16:00:00')
     })
-    makeSut(surveyResult)
+    loadSurveyResultSpy.surveyResults = surveyResult
+    makeSut(loadSurveyResultSpy)
     await waitFor(() => screen.getByTestId('survey-result'))
     expect(screen.getByTestId('day')).toHaveTextContent('19')
     expect(screen.getByTestId('month')).toHaveTextContent('mar')
@@ -66,5 +67,16 @@ describe('SurveyResult Component', () => {
     const percent = screen.queryAllByTestId('percent')
     expect(percent[0]).toHaveTextContent(`${surveyResult.answers[0].percent}%`)
     expect(percent[1]).toHaveTextContent(`${surveyResult.answers[1].percent}%`)
+  })
+
+  test('Should render error on UnexpectedError', async () => {
+    const loadSurveyListSpy = new LoadSurveyResultSpy()
+    const error = new UnexpectedError()
+    jest.spyOn(loadSurveyListSpy, 'load').mockRejectedValueOnce(error)
+    makeSut(loadSurveyListSpy)
+    await waitFor(() => screen.getByTestId('survey-result'))
+    expect(screen.queryByTestId('question')).not.toBeInTheDocument()
+    expect(screen.getByTestId('error')).toHaveTextContent(error.message)
+    expect(screen.queryByTestId('loading')).not.toBeInTheDocument()
   })
 })
