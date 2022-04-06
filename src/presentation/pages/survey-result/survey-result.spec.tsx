@@ -1,20 +1,28 @@
 import { ApiContext } from '@/presentation/context'
 import { SurveyResult } from '@/presentation/pages'
-import { mockAccountModel } from '@/domain/test'
+import { LoadSurveyResultSpy, mockAccountModel } from '@/domain/test'
 import { waitFor, render, screen } from '@testing-library/react'
 import React from 'react'
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 
-const makeSut = (): void => {
+type SutTypes = {
+  loadSurveyResultSpy: LoadSurveyResultSpy
+}
+
+const makeSut = (): SutTypes => {
   const history = createMemoryHistory({ initialEntries: ['/surveys'] })
+  const loadSurveyResultSpy = new LoadSurveyResultSpy()
   render(
     <ApiContext.Provider value={{ setCurrentAccount: jest.fn(), getCurrentAccount: () => mockAccountModel() }}>
       <Router navigator={history} location='/surveys' >
-        <SurveyResult />
+        <SurveyResult loadSurveyResult={loadSurveyResultSpy} />
       </Router>
     </ApiContext.Provider>
   )
+  return {
+    loadSurveyResultSpy
+  }
 }
 
 describe('SurveyResult Component', () => {
@@ -25,5 +33,11 @@ describe('SurveyResult Component', () => {
     expect(screen.queryByTestId('error')).not.toBeInTheDocument()
     expect(screen.queryByTestId('loading')).not.toBeInTheDocument()
     await waitFor(() => surveyResult)
+  })
+
+  test('Should call LoadSurveyResultSpy', async () => {
+    const { loadSurveyResultSpy } = makeSut()
+    await waitFor(() => screen.getByTestId('survey-result'))
+    expect(loadSurveyResultSpy.callsCount).toBe(1)
   })
 })
