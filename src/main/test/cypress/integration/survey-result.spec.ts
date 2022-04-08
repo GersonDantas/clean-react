@@ -1,7 +1,7 @@
 import * as Helpers from '../utils/helpers'
 import * as Http from '../utils/http-mocks'
 
-const path = /surveys/
+const path = /surveys\/any_id\/result/
 export const mockUnexpectedError = (): void => Http.mockServerError(path, 'GET')
 
 describe('SurveyResult', () => {
