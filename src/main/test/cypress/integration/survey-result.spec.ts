@@ -52,4 +52,12 @@ describe('SurveyResult', () => {
       assert.notExists(li.find('[data-testid="image"]'))
     })
   })
+
+  it('Should goto SurveyResult on back button click', () => {
+    cy.visit('')
+    mockSuccess()
+    cy.visit('/surveys/any_id')
+    cy.getByTestId('back-button').click()
+    Helpers.testUrl('/')
+  })
 })
