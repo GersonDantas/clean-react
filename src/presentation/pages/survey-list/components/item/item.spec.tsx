@@ -11,7 +11,7 @@ type SutTypes = {
 }
 
 const makeSut = (survey = mockSurveyModel()): SutTypes => {
-  const history = createMemoryHistory({ initialEntries: ['/'] })
+  const history = createMemoryHistory()
   render(
     <Router navigator={history} location='/'>
       <SurveyItem survey={survey} />

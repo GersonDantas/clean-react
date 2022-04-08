@@ -19,7 +19,7 @@ type SutParams = {
   validationError: string
 }
 
-const history = createMemoryHistory({ initialEntries: ['/signup'] })
+const history = createMemoryHistory()
 
 const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub()
