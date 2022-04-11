@@ -11,7 +11,7 @@ const Answer: React.FC<Props> = ({ answer }: Props) => {
   const { onAnswer } = useContext(SurveyResultContext)
   const activeClassName = answer.isCurrentAccountAnswer ? Styles.active : ''
   const answerClick = (event: React.MouseEvent): void => {
-    if (event.currentTarget.classList.contains('active')) {
+    if (event.currentTarget.classList.contains(Styles.active)) {
       return
     }
     onAnswer(answer.answer)
