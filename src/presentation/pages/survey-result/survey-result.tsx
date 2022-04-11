@@ -37,7 +37,6 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult }: Props) => {
       <div data-testid='survey-result' className={Styles.contentWrap}>
         {state.surveyResult && <SurveyResultData surveyResult={state.surveyResult} />}
         {state.isLoading && <Loading />}
-        {/* eslint-disable-next-line @typescript-eslint/no-empty-function */}
         {state.error && <Error error={state.error} reload={reload} />}
       </div>
       <Footer />
