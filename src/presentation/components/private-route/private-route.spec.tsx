@@ -6,6 +6,7 @@ import { render } from '@testing-library/react'
 import { Route, Router, Routes } from 'react-router-dom'
 import React from 'react'
 import { MakeSurveyList } from '@/main/factories/pages'
+import { RecoilRoot } from 'recoil'
 
 type SutTypes = {
   history: MemoryHistory
@@ -14,15 +15,17 @@ type SutTypes = {
 const makeSut = (account = mockAccountModel()): SutTypes => {
   const history = createMemoryHistory()
   render(
-    <ApiContext.Provider value={{ getCurrentAccount: () => account }}>
-      <Router navigator={history} location='/' >
-        <Routes>
-          <Route path="/" element={<PrivateRoute />} >
-            <Route path="" element={<MakeSurveyList />} />
-          </Route >
-        </Routes>
-      </Router>
-    </ApiContext.Provider>
+    <RecoilRoot>
+      <ApiContext.Provider value={{ getCurrentAccount: () => account }}>
+        <Router navigator={history} location='/' >
+          <Routes>
+            <Route path="/" element={<PrivateRoute />} >
+              <Route path="" element={<MakeSurveyList />} />
+            </Route >
+          </Routes>
+        </Router>
+      </ApiContext.Provider>
+    </RecoilRoot>
   )
 
   return {
