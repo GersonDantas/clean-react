@@ -1,10 +1,10 @@
 import { FormStatusBase } from '@/presentation/components'
 import { loginState } from './atoms'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import React from 'react'
 
 const FormStatus: React.FC = () => {
-  const [state] = useRecoilState(loginState)
+  const state = useRecoilValue(loginState)
   return (
     <FormStatusBase state={state} />
   )
