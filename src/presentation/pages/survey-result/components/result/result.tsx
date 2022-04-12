@@ -2,7 +2,6 @@ import Styles from './result-styles.scss'
 import { SurveyResultAnswer } from '@/presentation/pages/survey-result/components'
 import { Calendar } from '@/presentation/components'
 import { LoadSurveyResult } from '@/domain/usecases'
-import FlipMove from 'react-flip-move'
 import { useNavigate } from 'react-router'
 import React from 'react'
 
@@ -18,11 +17,9 @@ const Result: React.FC<Props> = ({ surveyResult }: Props) => {
         <Calendar date={surveyResult.date} className={Styles.calendarWrap} />
         <h2 data-testid='question'>{surveyResult.question}</h2>
       </hgroup>
-      <FlipMove data-testid='answers' className={Styles.answersList}>
-        <>
-          {surveyResult.answers.map(answer => <SurveyResultAnswer key={answer.answer} answer={answer} />)}
-        </>
-      </FlipMove>
+      <ul data-testid='answers' className={Styles.answersList}>
+        {surveyResult.answers.map(answer => <SurveyResultAnswer key={answer.answer} answer={answer} />)}
+      </ul>
       <button
         className={Styles.button}
         data-testid='back-button'
