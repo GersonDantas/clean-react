@@ -1,5 +1,5 @@
 export interface LoadSurveyList {
-  loadAll (): Promise<LoadSurveyList.Model[]>
+  loadAll: () => Promise<LoadSurveyList.Model[]>
 }
 
 export namespace LoadSurveyList {
