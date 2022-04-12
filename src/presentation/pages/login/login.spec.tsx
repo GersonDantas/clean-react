@@ -7,8 +7,9 @@ import { Authentication } from '@/domain/usecases'
 import { render, fireEvent, waitFor, screen } from '@testing-library/react'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
-import React from 'react'
+import { RecoilRoot } from 'recoil'
 import faker from 'faker'
+import React from 'react'
 
 type SutTypes = {
   authenticationSpy: AuthenticationSpy
@@ -26,14 +27,16 @@ const makeSut = (params?: SutParams): SutTypes => {
   const authenticationSpy = new AuthenticationSpy()
   const setCurrentAccountMock = jest.fn()
   render(
-    <ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock }}>
-      <Router navigator={history} location='/login'>
-        <Login
-          validation={validationStub}
-          authentication={authenticationSpy}
-        />
-      </Router>
-    </ApiContext.Provider>
+    <RecoilRoot>
+      <ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock }}>
+        <Router navigator={history} location='/login'>
+          <Login
+            validation={validationStub}
+            authentication={authenticationSpy}
+          />
+        </Router>
+      </ApiContext.Provider>
+    </RecoilRoot>
   )
   return { authenticationSpy, setCurrentAccountMock }
 }

@@ -1,16 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import Styles from './login-styles.scss'
-import {
-  Footer,
-  FormStatus,
-  LoginHeader,
-  Input,
-  SubmitButton
-} from '@/presentation/components'
-import { FormContext, ApiContext } from '@/presentation/context'
+import { Input, SubmitButton, loginState, FormStatus } from '@/presentation/pages/login/components'
+import { Footer, LoginHeader } from '@/presentation/components'
+import { ApiContext } from '@/presentation/context'
 import { Validation } from '@/presentation/protocols/validation'
 import { Authentication } from '@/domain/usecases'
+import { useRecoilState } from 'recoil'
+import { Link, useNavigate } from 'react-router-dom'
+import React, { useContext, useEffect } from 'react'
 
 type Props = {
   validation: Validation
@@ -23,15 +19,7 @@ const Login: React.FC<Props> = ({
 }: Props) => {
   const { setCurrentAccount } = useContext(ApiContext)
   const navigate = useNavigate()
-  const [state, setState] = useState({
-    isLoading: false,
-    isFormInvalid: true,
-    email: '',
-    password: '',
-    emailError: '',
-    passwordError: '',
-    mainError: ''
-  })
+  const [state, setState] = useRecoilState(loginState)
 
   useEffect(() => validate('email'), [state.email])
   useEffect(() => validate('password'), [state.password])
@@ -74,30 +62,16 @@ const Login: React.FC<Props> = ({
   return (
     <div className={Styles.loginWrap}>
       <LoginHeader />
-      <FormContext.Provider value={{ state, setState }}>
-        <form
-          data-testid="form"
-          className={Styles.form}
-          onSubmit={handleSubmit}
-        >
-          <h2>Login</h2>
-          <Input type="email" name="email" placeholder="Digite seu email" />
-          <Input
-            type="password"
-            name="password"
-            placeholder="Digite sua senha"
-          />
-
-          <SubmitButton text="Entrar" />
-
-          <Link data-testid="signup-link" to="/signup" className={Styles.link}>
-            Criar Conta
-          </Link>
-
-          <FormStatus />
-        </form>
-      </FormContext.Provider>
-
+      <form data-testid="form" className={Styles.form} onSubmit={handleSubmit}>
+        <h2>Login</h2>
+        <Input type="email" name="email" placeholder="Digite seu email" />
+        <Input type="password" name="password" placeholder="Digite sua senha" />
+        <SubmitButton text="Entrar" />
+        <Link data-testid="signup-link" to="/signup" className={Styles.link}>
+          Criar Conta
+        </Link>
+        <FormStatus />
+      </form>
       <Footer />
     </div>
   )
