@@ -3,7 +3,7 @@ import { Input, SubmitButton, loginState, FormStatus } from '@/presentation/page
 import { currentAccountState, Footer, LoginHeader } from '@/presentation/components'
 import { Validation } from '@/presentation/protocols/validation'
 import { Authentication } from '@/domain/usecases'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 import { Link, useNavigate } from 'react-router-dom'
 import React, { useEffect } from 'react'
 
@@ -16,10 +16,12 @@ const Login: React.FC<Props> = ({
   validation,
   authentication
 }: Props) => {
+  const resetLoginState = useResetRecoilState(loginState)
   const { setCurrentAccount } = useRecoilValue(currentAccountState)
   const navigate = useNavigate()
   const [state, setState] = useRecoilState(loginState)
 
+  useEffect(() => resetLoginState(), [])
   useEffect(() => validate('email'), [state.email])
   useEffect(() => validate('password'), [state.password])
 
