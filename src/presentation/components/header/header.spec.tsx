@@ -1,10 +1,10 @@
-import { Header } from '@/presentation/components'
-import { ApiContext } from '@/presentation/context'
+import { currentAccountState, Header } from '@/presentation/components'
 import { AccountModel } from '@/domain/models'
 import { mockAccountModel } from '@/domain/test'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { createMemoryHistory, MemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
+import { RecoilRoot } from 'recoil'
 import React from 'react'
 
 type SutTypes = {
@@ -15,12 +15,13 @@ type SutTypes = {
 const makeSut = (account = mockAccountModel()): SutTypes => {
   const history = createMemoryHistory()
   const setCurrentAccountMock = jest.fn()
+  const mockedState = { setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => account }
   render(
-    <ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => account }}>
+    <RecoilRoot initializeState={({ set }) => set(currentAccountState, mockedState)}>
       <Router navigator={history} location='/'>
         <Header />
       </Router>
-    </ApiContext.Provider>
+    </RecoilRoot>
   )
   return {
     history,
