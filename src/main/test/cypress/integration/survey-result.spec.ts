@@ -1,7 +1,7 @@
 import * as Helpers from '../utils/helpers'
 import * as Http from '../utils/http-mocks'
 
-const path = /surveys\/any_id\/result/
+const path = /api\/surveys/
 export const mockLoadSuccess = (): void => Http.mockOk(path, 'GET', 'load-survey-result')
 
 describe('SurveyResult', () => {

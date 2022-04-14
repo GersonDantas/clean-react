@@ -47,6 +47,7 @@
     "@typescript-eslint/no-namespace": "off",
     "no-redeclare": "off",
     "import/export": "off",
+    "cypress/no-unnecessary-waiting": "off",
     "react/jsx-uses-react": "error",
     "@typescript-eslint/no-misused-promises": "off",
     "react/jsx-uses-vars": "error",
