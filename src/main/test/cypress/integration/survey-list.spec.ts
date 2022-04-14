@@ -1,7 +1,7 @@
 import * as Helpers from '../utils/helpers'
 import * as Http from '../utils/http-mocks'
 
-const path = /surveys/
+const path = /api\/surveys/
 export const mockUnexpectedError = (): void => Http.mockServerError(path, 'GET')
 export const mockAccessDeniedError = (): void => Http.mockForbiddenError(path, 'GET')
 export const mockSuccess = (): void => Http.mockOk(path, 'GET', 'survey-list')
@@ -43,8 +43,9 @@ describe('SurveyList', () => {
   it('Should logout on logout link click', () => {
     mockUnexpectedError()
     cy.visit('')
-    cy.getByTestId('logout').click({ waitForAnimations: true })
-    Helpers.testUrl('/login')
+    cy.getByTestId('logout').click().then(() => {
+      Helpers.testUrl('/login')
+    })
   })
 
   it('Should present survey items', () => {
