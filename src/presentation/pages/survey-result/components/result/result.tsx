@@ -1,6 +1,7 @@
 import Styles from './result-styles.scss'
 import { SurveyResultAnswer } from '@/presentation/pages/survey-result/components'
 import { Calendar } from '@/presentation/components'
+
 import { LoadSurveyResult } from '@/domain/usecases'
 import { useNavigate } from 'react-router'
 import React from 'react'

@@ -4,6 +4,7 @@ import { SignUp } from '@/presentation/pages'
 import { AddAccountSpy, mockAccountModel } from '@/domain/test'
 import { EmailInUserError } from '@/domain/errors'
 import { AddAccount } from '@/domain/usecases'
+
 import { render, fireEvent, waitFor, screen } from '@testing-library/react'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'

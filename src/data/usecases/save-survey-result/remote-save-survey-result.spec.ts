@@ -3,6 +3,7 @@ import { HttpClientSpy, mockRemoteSurveyResultModel } from '@/data/test'
 import { RemoteSaveSurveyResult } from '@/data/usecases'
 import { AccessDeniedError, UnexpectedError } from '@/domain/errors'
 import { mockSaveSurveyResultParams, mockSurveyResultModel } from '@/domain/test'
+
 import faker from 'faker'
 
 type SutType = {

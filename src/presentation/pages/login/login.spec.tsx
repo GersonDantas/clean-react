@@ -4,6 +4,7 @@ import { ValidationStub, Helper } from '@/presentation/test'
 import { InvalidCredentialsError } from '@/domain/errors'
 import { AuthenticationSpy, mockAccountModel } from '@/domain/test'
 import { Authentication } from '@/domain/usecases'
+
 import { render, fireEvent, waitFor, screen } from '@testing-library/react'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'

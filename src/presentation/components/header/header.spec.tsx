@@ -1,6 +1,7 @@
 import { currentAccountState, Header } from '@/presentation/components'
 import { AccountModel } from '@/domain/models'
 import { mockAccountModel } from '@/domain/test'
+
 import { fireEvent, render, screen } from '@testing-library/react'
 import { createMemoryHistory, MemoryHistory } from 'history'
 import { Router } from 'react-router-dom'

@@ -1,6 +1,6 @@
+import { getCurrentAccountAdapter, setCurrentAccountAdapter } from './current-account-adapter'
 import { mockAccountModel } from '@/domain/test'
 import { LocalStorageAdapter } from '@/infra/http/cache/local-storage-adapter'
-import { getCurrentAccountAdapter, setCurrentAccountAdapter } from './current-account-adapter'
 
 // moclar todos os módulos do LocalStorageAdapter. Todos os objetos dele, vao ser como Dummes, ou um  {}
 jest.mock('@/infra/http/cache/local-storage-adapter')

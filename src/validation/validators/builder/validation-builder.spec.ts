@@ -1,11 +1,8 @@
-import faker from 'faker'
-import {
-  EmailValidation,
-  RequiredFieldValidation,
-  MinLengthValidation
-} from '@/validation/validators'
 import { ValidationBuilder as sut } from './validation-builder'
-import { CompareFieldsValidation } from '../compare-field/compare-fields-validation'
+import { EmailValidation, RequiredFieldValidation, MinLengthValidation } from '@/validation/validators'
+import { CompareFieldsValidation } from '@/validation/validators/compare-field/compare-fields-validation'
+
+import faker from 'faker'
 
 describe('ValidationBuilder', () => {
   const field = faker.database.column()

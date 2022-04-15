@@ -1,5 +1,6 @@
-import { InvalidFieldError } from '@/validation/errors'
 import { CompareFieldsValidation } from './compare-fields-validation'
+import { InvalidFieldError } from '@/validation/errors'
+
 import faker from 'faker'
 
 const makeSut = (field: string, valueToCompare: string): CompareFieldsValidation =>

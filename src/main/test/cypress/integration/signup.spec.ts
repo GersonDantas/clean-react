@@ -1,6 +1,7 @@
 import * as FormHelpers from '../utils/form-helpers'
 import * as Helpers from '../utils/helpers'
 import * as Http from '../utils/http-mocks'
+
 import faker from 'faker'
 
 const path = /signup/

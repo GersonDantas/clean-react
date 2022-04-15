@@ -3,6 +3,7 @@ import { HttpStatusCode } from '@/data/protocols/http'
 import { HttpClientSpy } from '@/data/test'
 import { EmailInUserError, UnexpectedError } from '@/domain/errors'
 import { mockAddAccountModel, mockAddAccountParams } from '@/domain/test'
+
 import faker from 'faker'
 
 type SutTypes = {
