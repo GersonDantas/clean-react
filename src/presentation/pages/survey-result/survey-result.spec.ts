@@ -1,3 +1,4 @@
+import { surveyResultState } from '@/presentation/pages/survey-result/components'
 import { SurveyResult } from '@/presentation/pages'
 import { AccessDeniedError, UnexpectedError } from '@/domain/errors'
 import { AccountModel } from '@/domain/models'
@@ -6,6 +7,7 @@ import { LoadSurveyResultSpy, SaveSurveyResultSpy, mockSurveyResultModel } from 
 import { waitFor, screen, fireEvent } from '@testing-library/react'
 import { createMemoryHistory, MemoryHistory } from 'history'
 import { renderWithHistory } from '@/presentation/test'
+import { LoadSurveyResult } from '@/domain/usecases'
 
 type SutTypes = {
   loadSurveyResultSpy: LoadSurveyResultSpy
@@ -17,11 +19,18 @@ type SutTypes = {
 type SutParams = {
   loadSurveyResultSpy?: LoadSurveyResultSpy
   saveSurveyResultSpy?: SaveSurveyResultSpy
+  initialState?: {
+    isLoading: boolean
+    error: string
+    surveyResult: LoadSurveyResult.Model
+    reload: boolean
+  }
 }
 
 const makeSut = ({
   loadSurveyResultSpy = new LoadSurveyResultSpy(),
-  saveSurveyResultSpy = new SaveSurveyResultSpy()
+  saveSurveyResultSpy = new SaveSurveyResultSpy(),
+  initialState = null
 }: SutParams = {}): SutTypes => {
   const history = createMemoryHistory()
   const { setCurrentAccountMock } = renderWithHistory({
@@ -29,6 +38,7 @@ const makeSut = ({
       loadSurveyResult: loadSurveyResultSpy,
       saveSurveyResult: saveSurveyResultSpy
     }),
+    states: initialState ? [{ atom: surveyResultState, value: initialState }] : [],
     history,
     location: '/surveys'
   })
@@ -199,13 +209,17 @@ describe('SurveyResult Component', () => {
   })
 
   test('Should present multiple answer click', async () => {
-    const { saveSurveyResultSpy } = makeSut()
+    const initialState = {
+      isLoading: true,
+      error: '',
+      surveyResult: null,
+      reload: false
+    }
+    const { saveSurveyResultSpy } = makeSut({ initialState })
     await waitFor(() => screen.getByTestId('survey-result'))
     const answerWrap = screen.queryAllByTestId('answer-wrap')
     fireEvent.click(answerWrap[1])
     await waitFor(() => screen.getByTestId('survey-result'))
-    fireEvent.click(answerWrap[1])
-    await waitFor(() => screen.getByTestId('survey-result'))
-    expect(saveSurveyResultSpy.callsCount).toBe(1)
+    expect(saveSurveyResultSpy.callsCount).toBe(0)
   })
 })
