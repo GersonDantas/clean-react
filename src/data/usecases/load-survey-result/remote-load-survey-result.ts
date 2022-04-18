@@ -14,10 +14,10 @@ export class RemoteLoadSurveyResult implements LoadSurveyResult {
       url: this.url,
       method: 'get'
     })
-    const remoteSurveysResult = httpResponse.body
+    const remoteSurveyResult = httpResponse.body
     switch (httpResponse.statusCode) {
       case HttpStatusCode.ok:
-        return Object.assign({}, remoteSurveysResult, { date: new Date(remoteSurveysResult.date) })
+        return { ...remoteSurveyResult, date: new Date(remoteSurveyResult.date) }
       case HttpStatusCode.forbidden: throw new AccessDeniedError()
       default: throw new UnexpectedError()
     }

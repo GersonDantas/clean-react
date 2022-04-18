@@ -3,7 +3,7 @@ import { SurveyResultAnswer } from '@/presentation/pages/survey-result/component
 import { Calendar } from '@/presentation/components'
 
 import { LoadSurveyResult } from '@/domain/usecases'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import React from 'react'
 
 type Props = {
