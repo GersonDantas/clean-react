@@ -9,7 +9,6 @@ export const MakeSurveyResult: React.FC = () => {
     id: string
   }
   const { id } = useParams<Props>()
-  console.log(id)
   return (
     <SurveyResult
       loadSurveyResult={makeRemoteLoadSurveyResult(id)}
