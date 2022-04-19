@@ -1,4 +1,4 @@
-import { Login } from '..'
+import { Login } from '@/presentation/pages'
 import { ValidationStub, Helper, renderWithHistory } from '@/tests/presentation/mocks'
 import { InvalidCredentialsError } from '@/domain/errors'
 import { AuthenticationSpy } from '@/tests/domain/mocks'

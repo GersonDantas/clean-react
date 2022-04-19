@@ -31,6 +31,6 @@
     "tests"
   ],
   "exclude": [
-    "./tests/e2e/cypress"
+    "tests/e2e/cypress"
   ]
 }
