@@ -13,11 +13,6 @@
 
 ## [**Link do arquivo notion com resumo da construção**](https://river-math-03e.notion.site/Curso-ReactJS-Hooks-TDD-Clean-Architecture-SOLID-e-Patterns-370d9d8484f84a94aefa0d043d687eb5)
 
-### username and password of the running application. Go to evironments this repositorie
-
-* user: mango@gmail.com
-* password: 12345
-
 Essa sistema faz parte do treinamento do professor Rodrigo Manguinho (Mango) na Udemy.
 
 O objetivo do treinamento é mostrar como criar um sistema em ReactJs utilizando os novos Hooks, Recoil, com uma arquitetura bem definida e desacoplada, utilizando TDD (programação orientada a testes) como metodologia de trabalho, Clean Architecture para fazer a distribuição de responsabilidades em camadas, sempre seguindo os princípios do SOLID, DRY, YAGNI, KISS e aplicando Design Patterns para resolver alguns problemas comuns.
