@@ -1,7 +1,7 @@
+import { ValidationComposite } from '@/validation/validators'
 import {
-  ValidationBuilder as Builder,
-  ValidationComposite
-} from '@/validation/validators'
+  ValidationBuilder as Builder
+} from '@/main/builders'
 
 export const makeSignUpValidation = (): ValidationComposite => {
   return ValidationComposite.build([
