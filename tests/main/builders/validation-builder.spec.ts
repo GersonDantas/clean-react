@@ -36,4 +36,19 @@ describe('ValidationBuilder', () => {
 
     expect(validators).toEqual([new CompareFieldsValidation(fieldName, fieldToCompare)])
   })
+
+  test('Should return validators', () => {
+    const fieldName = faker.database.column()
+    const fieldToCompare = faker.random.words(7)
+    const length = faker.datatype.number(14)
+
+    const validators = sut.field(fieldName).required().email().min(length).sameAs(fieldToCompare).build()
+
+    expect(validators).toEqual([
+      new RequiredFieldValidation(fieldName),
+      new EmailValidation(fieldName),
+      new MinLengthValidation(fieldName, length),
+      new CompareFieldsValidation(fieldName, fieldToCompare)
+    ])
+  })
 })
