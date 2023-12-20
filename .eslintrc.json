@@ -1,0 +1,57 @@
+{
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "extends": [
+    "standard-with-typescript",
+    "plugin:react/recommended",
+    "plugin:cypress/recommended"
+  ],
+  "plugins": [
+    "react",
+    "cypress"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig-eslint.json"
+  },
+  "env": {
+    "cypress/globals": true
+  },
+  "rules": {
+    "react/jsx-indent": [
+      1,
+      2
+    ],
+    "react/jsx-indent-props": [
+      1,
+      2
+    ],
+    "react/jsx-closing-bracket-location": [
+      1,
+      "line-aligned"
+    ],
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/comma-spacing": "off",
+    "require-await": "off",
+    "space-before-function-paren": [
+      "error",
+      "always"
+    ],
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/require-await": "off",
+    "@typescript-eslint/return-await": "off",
+    "@typescript-eslint/no-namespace": "off",
+    "no-redeclare": "off",
+    "import/export": "off",
+    "cypress/no-unnecessary-waiting": "off",
+    "react/jsx-uses-react": "error",
+    "@typescript-eslint/no-misused-promises": "off",
+    "react/jsx-uses-vars": "error",
+    "@typescript-eslint/camelcase": "off",
+    "react/prop-types": "off"
+  }
+}
