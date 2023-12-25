@@ -2,12 +2,12 @@ import * as Helpers from '../utils/helpers'
 import * as Http from '../utils/http-mocks'
 
 const path = /api\/surveys/
-export const mockLoadSuccess = (): void => Http.mockOk(path, 'GET', 'load-survey-result')
+export const mockLoadSuccess = (): void => { Http.mockOk(path, 'GET', 'load-survey-result') }
 
 describe('SurveyResult', () => {
   describe('load', () => {
-    const mockUnexpectedError = (): void => Http.mockServerError(path, 'GET')
-    const mockAccessDeniedError = (): void => Http.mockForbiddenError(path, 'GET')
+    const mockUnexpectedError = (): void => { Http.mockServerError(path, 'GET') }
+    const mockAccessDeniedError = (): void => { Http.mockForbiddenError(path, 'GET') }
 
     beforeEach(() => {
       cy.fixture('account').then(account => {
@@ -65,9 +65,9 @@ describe('SurveyResult', () => {
   })
 
   describe('save', () => {
-    const mockUnexpectedError = (): void => Http.mockServerError(path, 'PUT')
-    const mockAccessDeniedError = (): void => Http.mockForbiddenError(path, 'PUT')
-    const mockSaveSuccess = (): void => Http.mockOk(path, 'PUT', 'save-survey-result')
+    const mockUnexpectedError = (): void => { Http.mockServerError(path, 'PUT') }
+    const mockAccessDeniedError = (): void => { Http.mockForbiddenError(path, 'PUT') }
+    const mockSaveSuccess = (): void => { Http.mockOk(path, 'PUT', 'save-survey-result') }
 
     beforeEach(() => {
       cy.fixture('account').then(account => {

@@ -2,9 +2,9 @@ import * as Helpers from '../utils/helpers'
 import * as Http from '../utils/http-mocks'
 
 const path = /api\/surveys/
-export const mockUnexpectedError = (): void => Http.mockServerError(path, 'GET')
-export const mockAccessDeniedError = (): void => Http.mockForbiddenError(path, 'GET')
-export const mockSuccess = (): void => Http.mockOk(path, 'GET', 'survey-list')
+export const mockUnexpectedError = (): void => { Http.mockServerError(path, 'GET') }
+export const mockAccessDeniedError = (): void => { Http.mockForbiddenError(path, 'GET') }
+export const mockSuccess = (): void => { Http.mockOk(path, 'GET', 'survey-list') }
 
 describe('SurveyList', () => {
   beforeEach(() => {
