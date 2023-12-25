@@ -1,13 +1,13 @@
 import { surveyResultState } from '@/presentation/pages/survey-result/components'
 import { SurveyResult } from '@/presentation/pages'
 import { AccessDeniedError, UnexpectedError } from '@/domain/errors'
-import { AccountModel } from '@/domain/models'
+import { type AccountModel } from '@/domain/models'
 import { LoadSurveyResultSpy, SaveSurveyResultSpy, mockSurveyResultModel } from '@/tests/domain/mocks'
 
 import { waitFor, screen, fireEvent } from '@testing-library/react'
-import { createMemoryHistory, MemoryHistory } from 'history'
+import { createMemoryHistory, type MemoryHistory } from 'history'
 import { renderWithHistory } from '@/tests/presentation/mocks'
-import { LoadSurveyResult } from '@/domain/usecases'
+import { type LoadSurveyResult } from '@/domain/usecases'
 
 type SutTypes = {
   loadSurveyResultSpy: LoadSurveyResultSpy

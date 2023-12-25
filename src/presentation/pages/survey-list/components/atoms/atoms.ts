@@ -1,4 +1,4 @@
-import { LoadSurveyList } from '@/domain/usecases'
+import { type LoadSurveyList } from '@/domain/usecases'
 import { atom } from 'recoil'
 
 export const surveyListState = atom({

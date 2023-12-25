@@ -4,7 +4,7 @@ import { RemoteSaveSurveyResult } from '@/data/usecases'
 import { AccessDeniedError, UnexpectedError } from '@/domain/errors'
 import { mockSaveSurveyResultParams, mockSurveyResultModel } from '@/tests/domain/mocks'
 
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 type SutType = {
   sut: RemoteSaveSurveyResult

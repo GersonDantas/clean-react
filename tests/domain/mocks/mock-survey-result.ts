@@ -1,24 +1,24 @@
-import { LoadSurveyResult, SaveSurveyResult } from '@/domain/usecases'
+import { type LoadSurveyResult, type SaveSurveyResult } from '@/domain/usecases'
 
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 export const mockSaveSurveyResultParams = (): SaveSurveyResult.params => ({
-  answer: faker.random.words(10)
+  answer: faker.lorem.words(10)
 })
 
 export const mockSurveyResultModel = (): LoadSurveyResult.Model => ({
-  question: faker.random.words(10),
+  question: faker.lorem.words(10),
   date: faker.date.recent(),
   answers: [{
     image: faker.internet.url(),
-    answer: faker.random.words(10),
-    count: faker.datatype.number(),
-    percent: faker.datatype.number(100),
+    answer: faker.lorem.words(10),
+    count: faker.helpers.rangeToNumber(1),
+    percent: faker.helpers.rangeToNumber(100),
     isCurrentAccountAnswer: true
   }, {
-    answer: faker.random.words(5),
-    count: faker.datatype.number(),
-    percent: faker.datatype.number(100),
+    answer: faker.lorem.words(5),
+    count: faker.helpers.rangeToNumber(1),
+    percent: faker.helpers.rangeToNumber(100),
     isCurrentAccountAnswer: false
   }]
 })

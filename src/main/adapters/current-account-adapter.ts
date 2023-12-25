@@ -1,5 +1,5 @@
 import { makeLocalStorageAdapter } from '@/main/factories/cache'
-import { AccountModel } from '@/domain/models'
+import { type AccountModel } from '@/domain/models'
 
 export const setCurrentAccountAdapter = (account: AccountModel): void => {
   makeLocalStorageAdapter().set('account', account)

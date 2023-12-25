@@ -2,11 +2,11 @@ import * as FormHelpers from '../utils/form-helpers'
 import * as Helpers from '../utils/helpers'
 import * as Http from '../utils/http-mocks'
 
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 const path = /api\/signup/
-export const mockEmailInUseError = (): void => Http.mockForbiddenError(path, 'POST')
-export const mockUnexpectedError = (): void => Http.mockServerError(path, 'POST')
+export const mockEmailInUseError = (): void => { Http.mockForbiddenError(path, 'POST') }
+export const mockUnexpectedError = (): void => { Http.mockServerError(path, 'POST') }
 export const mockSuccess = (): void => {
   Http.mockOk(/api\/surveys/, 'GET', 'survey-list')
   Http.mockOk(path, 'POST', 'account', 'signupRequest')
@@ -54,7 +54,7 @@ describe('SignUp', () => {
   it('Should present error state if form is invalid', () => {
     cy.getByTestId('name').focus().type(faker.random.alphaNumeric(3))
     FormHelpers.testInputStatus('name', 'Valor inválido')
-    cy.getByTestId('email').focus().type(faker.random.word())
+    cy.getByTestId('email').focus().type(faker.lorem.word())
     FormHelpers.testInputStatus('email', 'Valor inválido')
     cy.getByTestId('password').focus().type(faker.random.alphaNumeric(3))
     FormHelpers.testInputStatus('password', 'Valor inválido')

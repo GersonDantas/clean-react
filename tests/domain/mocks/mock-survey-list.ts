@@ -1,10 +1,10 @@
-import { LoadSurveyList } from '@/domain/usecases'
+import { type LoadSurveyList } from '@/domain/usecases'
 
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 export const mockSurveyModel = (): LoadSurveyList.Model => ({
-  id: faker.datatype.uuid(),
-  question: faker.random.words(10),
+  id: faker.database.mongodbObjectId(),
+  question: faker.lorem.words(10),
   didAnswer: faker.datatype.boolean(),
   date: faker.date.recent()
 })

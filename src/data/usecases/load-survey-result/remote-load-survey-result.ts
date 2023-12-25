@@ -1,7 +1,7 @@
-import { RemoteSurveyResultModel } from '@/data/models'
-import { HttpClient, HttpStatusCode } from '@/data/protocols/http'
+import { type RemoteSurveyResultModel } from '@/data/models'
+import { type HttpClient, HttpStatusCode } from '@/data/protocols/http'
 import { AccessDeniedError, UnexpectedError } from '@/domain/errors'
-import { LoadSurveyResult } from '@/domain/usecases'
+import { type LoadSurveyResult } from '@/domain/usecases'
 
 export class RemoteLoadSurveyResult implements LoadSurveyResult {
   constructor (

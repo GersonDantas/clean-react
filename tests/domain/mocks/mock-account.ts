@@ -1,8 +1,8 @@
-import { AccountModel } from '@/domain/models'
+import { type AccountModel } from '@/domain/models'
 
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 export const mockAccountModel = (): AccountModel => ({
-  accessToken: faker.datatype.uuid(),
-  name: faker.name.findName()
+  accessToken: faker.database.mongodbObjectId(),
+  name: faker.internet.displayName()
 })

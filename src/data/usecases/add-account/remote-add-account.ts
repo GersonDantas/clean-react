@@ -1,5 +1,5 @@
-import { AddAccount } from '@/domain/usecases'
-import { HttpClient, HttpStatusCode } from '@/data/protocols/http'
+import { type AddAccount } from '@/domain/usecases'
+import { type HttpClient, HttpStatusCode } from '@/data/protocols/http'
 import { EmailInUserError, UnexpectedError } from '@/domain/errors'
 
 export class RemoteAddAccount implements AddAccount {

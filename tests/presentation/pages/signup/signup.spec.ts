@@ -2,11 +2,11 @@ import { Helper, renderWithHistory, ValidationStub } from '@/tests/presentation/
 import { SignUp } from '@/presentation/pages'
 import { AddAccountSpy } from '@/tests/domain/mocks'
 import { EmailInUserError } from '@/domain/errors'
-import { AddAccount } from '@/domain/usecases'
+import { type AddAccount } from '@/domain/usecases'
 
 import { fireEvent, waitFor, screen } from '@testing-library/react'
 import { createMemoryHistory } from 'history'
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 type SutTypes = {
   addAccountSpy: AddAccountSpy
@@ -47,7 +47,7 @@ const simulateValidSubmit = async (
 
 describe('SignUp component', () => {
   test('Should start initial with state', () => {
-    const validationError = faker.random.words()
+    const validationError = faker.lorem.words()
     makeSut({ validationError })
     expect(screen.getByTestId('error-wrap').children).toHaveLength(0)
     expect(screen.getByTestId('submit')).toBeDisabled()
@@ -58,28 +58,28 @@ describe('SignUp component', () => {
   })
 
   test('Should show name error if Validation fails', () => {
-    const validationError = faker.random.words()
+    const validationError = faker.lorem.words()
     makeSut({ validationError })
     Helper.populateField('name')
     Helper.testStatusForField('name', validationError)
   })
 
   test('Should show email error if Validation fails', () => {
-    const validationError = faker.random.words()
+    const validationError = faker.lorem.words()
     makeSut({ validationError })
     Helper.populateField('email')
     Helper.testStatusForField('email', validationError)
   })
 
   test('Should show password error if Validation fails', () => {
-    const validationError = faker.random.words()
+    const validationError = faker.lorem.words()
     makeSut({ validationError })
     Helper.populateField('password')
     Helper.testStatusForField('password', validationError)
   })
 
   test('Should show passwordConfirmation error if Validation fails', () => {
-    const validationError = faker.random.words()
+    const validationError = faker.lorem.words()
     makeSut({ validationError })
     Helper.populateField('passwordConfirmation')
     Helper.testStatusForField('passwordConfirmation', validationError)
@@ -146,7 +146,7 @@ describe('SignUp component', () => {
   })
 
   test('Should not call AddAccount if form is invalid', async () => {
-    const validationError = faker.random.words()
+    const validationError = faker.lorem.words()
     const { addAccountSpy } = makeSut({ validationError })
     await simulateValidSubmit()
     expect(addAccountSpy.callsCount).toBe(0)

@@ -1,9 +1,9 @@
 import { AuthorizeHttpClientDecorator } from '@/main/decorators'
 import { GetStorageSpy, HttpClientSpy, mockHttpRequest } from '@/tests/data/mocks'
-import { HttpRequest } from '@/data/protocols/http'
+import { type HttpRequest } from '@/data/protocols/http'
 import { mockAccountModel } from '@/tests/domain/mocks'
 
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 type SutTypes = {
   sut: AuthorizeHttpClientDecorator
@@ -22,7 +22,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('AuthorizeHttptClientDecorator', () => {
+describe('AuthorizeHttpClientDecorator', () => {
   test('Should call GetStorage with correct values', async () => {
     const { sut, getStorageSpy } = makeSut()
     await sut.request(mockHttpRequest())
@@ -33,9 +33,9 @@ describe('AuthorizeHttptClientDecorator', () => {
     const { sut, httpClientSpy } = makeSut()
     const httpRequest: HttpRequest = {
       url: faker.internet.url(),
-      method: faker.random.arrayElement(['post', 'get', 'put', 'delete']),
+      method: faker.helpers.arrayElement(['post', 'get', 'put', 'delete']),
       headers: {
-        field: faker.random.words()
+        field: faker.lorem.words()
       }
     }
     await sut.request(httpRequest)
@@ -49,7 +49,7 @@ describe('AuthorizeHttptClientDecorator', () => {
     getStorageSpy.value = mockAccountModel()
     const httpRequest: HttpRequest = {
       url: faker.internet.url(),
-      method: faker.random.arrayElement(['post', 'get', 'put', 'delete'])
+      method: faker.helpers.arrayElement(['post', 'get', 'put', 'delete'])
     }
     await sut.request(httpRequest)
     expect(httpClientSpy.url).toBe(httpRequest.url)
@@ -62,13 +62,11 @@ describe('AuthorizeHttptClientDecorator', () => {
   test('Should merge headers to HttpGetClient', async () => {
     const { sut, getStorageSpy, httpClientSpy } = makeSut()
     getStorageSpy.value = mockAccountModel()
-    const field = faker.random.words()
+    const field = faker.lorem.words()
     const httpRequest: HttpRequest = {
       url: faker.internet.url(),
-      method: faker.random.arrayElement(['post', 'get', 'put', 'delete']),
-      headers: {
-        field: field
-      }
+      method: faker.helpers.arrayElement(['post', 'get', 'put', 'delete']),
+      headers: { field }
     }
     await sut.request(httpRequest)
     expect(httpClientSpy.url).toBe(httpRequest.url)

@@ -29,7 +29,7 @@ const Input: React.FC<Props> = ({ state, setState, ...props }: Props) => {
       />
       <label
         data-testid={`${props.name}-label`}
-        onClick={() => inputRef.current.focus()}
+        onClick={() => { inputRef.current.focus() }}
         title={error}
       >
         {props.placeholder}

@@ -1,10 +1,10 @@
 import { SurveyList } from '@/presentation/pages'
 import { renderWithHistory } from '@/tests/presentation/mocks'
-import { AccountModel } from '@/domain/models'
+import { type AccountModel } from '@/domain/models'
 import { LoadSurveyListSpy } from '@/tests/domain/mocks'
 import { AccessDeniedError, UnexpectedError } from '@/domain/errors'
 
-import { createMemoryHistory, MemoryHistory } from 'history'
+import { createMemoryHistory, type MemoryHistory } from 'history'
 import { fireEvent, screen, waitFor } from '@testing-library/react'
 
 type SutTypes = {

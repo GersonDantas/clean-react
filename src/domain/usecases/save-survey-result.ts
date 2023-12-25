@@ -1,4 +1,4 @@
-import { SaveSurveyResultModel } from '@/domain/models'
+import { type SaveSurveyResultModel } from '@/domain/models'
 
 export interface SaveSurveyResult {
   save: (params: SaveSurveyResult.params) => Promise<SaveSurveyResult.Model>

@@ -1,6 +1,6 @@
 import Styles from './list-styles.scss'
 import { SurveyItem, SurveyItemEmpty } from '@/presentation/pages/survey-list/components'
-import { LoadSurveyList } from '@/domain/usecases'
+import { type LoadSurveyList } from '@/domain/usecases'
 
 import React from 'react'
 

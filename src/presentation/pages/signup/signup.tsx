@@ -1,8 +1,8 @@
 import Styles from './signup-styles.scss'
 import { signupState, Input, SubmitButton, FormStatus } from './components'
 import { currentAccountState, Footer, LoginHeader } from '@/presentation/components'
-import { Validation } from '@/presentation/protocols/validation'
-import { AddAccount } from '@/domain/usecases'
+import { type Validation } from '@/presentation/protocols/validation'
+import { type AddAccount } from '@/domain/usecases'
 
 import { Link, useNavigate } from 'react-router-dom'
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
@@ -22,11 +22,11 @@ const SignUp: React.FC<Props> = ({
   const navigate = useNavigate()
   const [state, setState] = useRecoilState(signupState)
 
-  useEffect(() => resetSignupState(), [])
-  useEffect(() => validate('name'), [state.name])
-  useEffect(() => validate('email'), [state.email])
-  useEffect(() => validate('password'), [state.password])
-  useEffect(() => validate('passwordConfirmation'), [state.passwordConfirmation])
+  useEffect(() => { resetSignupState() }, [])
+  useEffect(() => { validate('name') }, [state.name])
+  useEffect(() => { validate('email') }, [state.email])
+  useEffect(() => { validate('password') }, [state.password])
+  useEffect(() => { validate('passwordConfirmation') }, [state.passwordConfirmation])
 
   const validate = (field: string): void => {
     const { email, password } = state

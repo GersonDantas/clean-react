@@ -1,18 +1,18 @@
 import {
-  HttpRequest,
-  HttpResponse,
+  type HttpRequest,
+  type HttpResponse,
   HttpStatusCode,
-  HttpClient,
-  HttpMethod
+  type HttpClient,
+  type HttpMethod
 } from '@/data/protocols/http'
 
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 export const mockHttpRequest = (): HttpRequest => ({
   url: faker.internet.url(),
-  method: faker.random.arrayElement(['post', 'get', 'put', 'delete']),
-  body: faker.random.objectElement(),
-  headers: faker.random.objectElement()
+  method: faker.helpers.arrayElement(['post', 'get', 'put', 'delete']),
+  body: faker.getMetadata(),
+  headers: faker.getMetadata()
 })
 
 export class HttpClientSpy<R = any> implements HttpClient<R> {

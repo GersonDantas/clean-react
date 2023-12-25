@@ -1,5 +1,5 @@
 import { fireEvent, screen } from '@testing-library/react'
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 export const testStatusForField = (
   fieldName: string,

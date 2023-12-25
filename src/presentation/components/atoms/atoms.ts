@@ -1,4 +1,4 @@
-import { AccountModel } from '@/domain/models'
+import { type AccountModel } from '@/domain/models'
 
 import { atom } from 'recoil'
 

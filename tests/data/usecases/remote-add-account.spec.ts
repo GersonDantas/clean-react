@@ -4,7 +4,7 @@ import { HttpClientSpy } from '@/tests/data/mocks'
 import { EmailInUserError, UnexpectedError } from '@/domain/errors'
 import { mockAddAccountModel, mockAddAccountParams } from '@/tests/domain/mocks'
 
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 type SutTypes = {
   sut: RemoteAddAccount

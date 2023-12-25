@@ -1,6 +1,6 @@
-import { HttpClient, HttpStatusCode } from '@/data/protocols/http'
+import { type HttpClient, HttpStatusCode } from '@/data/protocols/http'
 import { AccessDeniedError, UnexpectedError } from '@/domain/errors'
-import { LoadSurveyList } from '@/domain/usecases/load-survey-list'
+import { type LoadSurveyList } from '@/domain/usecases/load-survey-list'
 
 export class RemoteLoadSurveyList implements LoadSurveyList {
   constructor (

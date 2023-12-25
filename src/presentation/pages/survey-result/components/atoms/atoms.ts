@@ -1,4 +1,4 @@
-import { LoadSurveyResult } from '@/domain/usecases'
+import { type LoadSurveyResult } from '@/domain/usecases'
 
 import { atom } from 'recoil'
 

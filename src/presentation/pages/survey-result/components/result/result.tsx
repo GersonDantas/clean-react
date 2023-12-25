@@ -2,7 +2,7 @@ import Styles from './result-styles.scss'
 import { SurveyResultAnswer } from '@/presentation/pages/survey-result/components'
 import { Calendar } from '@/presentation/components'
 
-import { LoadSurveyResult } from '@/domain/usecases'
+import { type LoadSurveyResult } from '@/domain/usecases'
 import { useNavigate } from 'react-router-dom'
 import React from 'react'
 
@@ -24,7 +24,7 @@ const Result: React.FC<Props> = ({ surveyResult }: Props) => {
       <button
         className={Styles.button}
         data-testid='back-button'
-        onClick={() => navigate(-1)}
+        onClick={() => { navigate(-1) }}
       >Voltar</button>
     </>
   )

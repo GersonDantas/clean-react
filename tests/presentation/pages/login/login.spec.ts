@@ -2,11 +2,11 @@ import { Login } from '@/presentation/pages'
 import { ValidationStub, Helper, renderWithHistory } from '@/tests/presentation/mocks'
 import { InvalidCredentialsError } from '@/domain/errors'
 import { AuthenticationSpy } from '@/tests/domain/mocks'
-import { Authentication } from '@/domain/usecases'
+import { type Authentication } from '@/domain/usecases'
 
 import { fireEvent, waitFor, screen } from '@testing-library/react'
 import { createMemoryHistory } from 'history'
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 type SutTypes = {
   authenticationSpy: AuthenticationSpy
@@ -43,7 +43,7 @@ const simulateValidSubmit = async (
 
 describe('Login component', () => {
   test('Should start initial with state', () => {
-    const validationError = faker.random.words()
+    const validationError = faker.lorem.words()
     makeSut({ validationError })
     expect(screen.getByTestId('error-wrap').children).toHaveLength(0)
     expect(screen.getByTestId('submit')).toBeDisabled()
@@ -52,14 +52,14 @@ describe('Login component', () => {
   })
 
   test('Should show email error if Validation fails', () => {
-    const validationError = faker.random.words()
+    const validationError = faker.lorem.words()
     makeSut({ validationError })
     Helper.populateField('email')
     Helper.testStatusForField('email', validationError)
   })
 
   test('Should show password error if Validation fails', () => {
-    const validationError = faker.random.words()
+    const validationError = faker.lorem.words()
     makeSut({ validationError })
     Helper.populateField('password')
     Helper.testStatusForField('password', validationError)
@@ -106,7 +106,7 @@ describe('Login component', () => {
   })
 
   test('Should not call Authentication if form is invalid', async () => {
-    const validationError = faker.random.words()
+    const validationError = faker.lorem.words()
     const { authenticationSpy } = makeSut({ validationError })
     await simulateValidSubmit()
     expect(authenticationSpy.callsCount).toBe(0)

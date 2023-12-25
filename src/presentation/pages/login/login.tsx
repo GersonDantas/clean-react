@@ -1,8 +1,8 @@
 import Styles from './login-styles.scss'
 import { Input, SubmitButton, loginState, FormStatus } from '@/presentation/pages/login/components'
 import { currentAccountState, Footer, LoginHeader } from '@/presentation/components'
-import { Validation } from '@/presentation/protocols/validation'
-import { Authentication } from '@/domain/usecases'
+import { type Validation } from '@/presentation/protocols/validation'
+import { type Authentication } from '@/domain/usecases'
 
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 import { Link, useNavigate } from 'react-router-dom'
@@ -22,9 +22,9 @@ const Login: React.FC<Props> = ({
   const navigate = useNavigate()
   const [state, setState] = useRecoilState(loginState)
 
-  useEffect(() => resetLoginState(), [])
-  useEffect(() => validate('email'), [state.email])
-  useEffect(() => validate('password'), [state.password])
+  useEffect(() => { resetLoginState() }, [])
+  useEffect(() => { validate('email') }, [state.email])
+  useEffect(() => { validate('password') }, [state.password])
 
   const validate = (field: string): void => {
     const { email, password } = state

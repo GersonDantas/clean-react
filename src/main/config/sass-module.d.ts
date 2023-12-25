@@ -1,5 +1,5 @@
 declare module '*.scss' {
   // entender as extenções do scss como classes
-  const content: { [className: string]: string }
+  const content: Record<string, string>
   export = content
 }

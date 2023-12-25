@@ -28,6 +28,7 @@
   "license": "ISC",
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^6.0.0",
+    "@faker-js/faker": "^8.3.1",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
     "@types/axios": "^0.14.0",
@@ -52,7 +53,6 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-standard": "^5.0.0",
-    "faker": "^6.6.6",
     "favicons-webpack-plugin": "^6.0.1",
     "full-icu": "^1.4.0",
     "git-commit-msg-linter": "^5.0.6",

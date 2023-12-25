@@ -1,7 +1,7 @@
 import { InputBase } from '@/presentation/components'
 
-import { fireEvent, render, RenderResult } from '@testing-library/react'
-import faker from 'faker'
+import { fireEvent, render, type RenderResult } from '@testing-library/react'
+import { faker } from '@faker-js/faker'
 import React from 'react'
 
 const makeSut = (fieldName: string): RenderResult => {
