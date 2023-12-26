@@ -25,6 +25,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
+      
+      - name: Run eslint install
+        run: npm install --production 
+      - name: Run eslint fix
+        run: eslint 'src/**'
       - name: Run coveralls code
         run: npm run test:coveralls
       - name: Run code test CI
