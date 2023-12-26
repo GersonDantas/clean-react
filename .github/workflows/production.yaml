@@ -27,7 +27,7 @@ jobs:
 
       
       - name: Run eslint install
-        run: npm install --global eslint
+        run: npm install --global eslint standard-with-typescript
       - name: Run eslint fix
         run: eslint 'src/**'
       - name: Run packages install
