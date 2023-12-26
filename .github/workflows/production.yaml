@@ -10,6 +10,11 @@ jobs:
   Deploy-Production:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
+      - uses: stefanoeb/eslint-action@1.0.2
+        with:
+          files: src/
+
       - uses: actions/checkout@v2
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
@@ -19,3 +24,7 @@ jobs:
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - uses: actions/checkout@v1
+      - name: Run Jest
+        uses: stefanoeb/jest-action@1.0.3
