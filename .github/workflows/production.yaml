@@ -11,9 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: stefanoeb/eslint-action@1.0.2
-        with:
-          files: src/
+      - name: Run Jest
+        uses: stefanoeb/jest-action@1.0.3
+
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+      
+      - name: Run coveralls code
+        run: npm run test:coveralls
+      - name: Run code test CI
+        run: npm run test:cypress:ci
 
       - uses: actions/checkout@v2
       - name: Install Vercel CLI
@@ -24,7 +33,3 @@ jobs:
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
-
-      - uses: actions/checkout@v1
-      - name: Run Jest
-        uses: stefanoeb/jest-action@1.0.3
