@@ -27,9 +27,11 @@ jobs:
 
       
       - name: Run eslint install
-        run: npm install --production 
+        run: npm install --global eslint
       - name: Run eslint fix
         run: eslint 'src/**'
+      - name: Run packages install
+        run: npm install --global cross-env jest start-server-and-test cypress
       - name: Run coveralls code
         run: npm run test:coveralls
       - name: Run code test CI
