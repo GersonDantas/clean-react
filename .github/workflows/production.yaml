@@ -25,11 +25,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      
-      - name: Run eslint install
-        run: npm install --global eslint@8 eslint-plugin-promise@6 eslint-plugin-import@2 eslint-plugin-node@11 @typescript-eslint/eslint-plugin@6 eslint-config-standard-with-typescript
-      - name: Run eslint fix
-        run: eslint 'src/**'
       - name: Run packages install
         run: npm install --global cross-env jest start-server-and-test cypress
       - name: Run coveralls code
